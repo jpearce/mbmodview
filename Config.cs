@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Windows.Forms;
 
-namespace MBScriptEditor
+namespace MBModViewer
 {
     /// <summary>Static config class, don't care for the designer-based one.</summary>
     internal static class Config

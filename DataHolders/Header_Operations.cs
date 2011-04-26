@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace MBScriptEditor
+namespace MBModViewer
 {
     internal static class Header_Operations
     {
@@ -15,11 +15,8 @@ namespace MBScriptEditor
         /// <summary>Static initializer</summary>
         static Header_Operations()
         {
-            filelocation = new FileInfo(Config.GetSetting("filelocation_header_operations_py"));
-            if (filelocation.Exists)
-            {
-                Config.SetSetting("filelocation_header_operations_py", filelocation.FullName);
-            }
+
+            filelocation = new FileInfo(Config.GetSetting("filelocation_pydir") + "header_operations.py");
             StringValues = new SortedDictionary<String, Int64>();
             lhs_operations = new List<string>(128);
             global_lhs_operations = new List<string>(128);
@@ -102,9 +99,8 @@ namespace MBScriptEditor
                                     if (!Int64.TryParse(val, out parsedval))                                        
                                     {
                                         if(val.StartsWith("0x"))
-                                        {
-                                            Int64.TryParse(val.Substring(2), 
-                                                System.Globalization.NumberStyles.AllowHexSpecifier, null, out parsedval);
+                                        {                                            
+                                            Int64.TryParse(val.Substring(2), System.Globalization.NumberStyles.AllowHexSpecifier, null, out parsedval);                                                                                        
                                         }                                        
                                     }                                    
                                     StringValues.Add(key, parsedval); 

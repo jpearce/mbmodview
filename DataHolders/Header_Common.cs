@@ -4,24 +4,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace MBScriptEditor
+namespace MBModViewer
 {
     internal static class Header_Common
     {
         internal static FileInfo filelocation;
         internal static SortedDictionary<String, String> StringValues;
-        internal static SortedDictionary<String, Int64> UintValues;
+        internal static SortedDictionary<String, Int64> IntValues;
 
         /// <summary>Static initializer</summary>
         static Header_Common()
         {
-            filelocation = new FileInfo(Config.GetSetting("filelocation_headercommonpy"));
-            if (filelocation.Exists)
-            {
-                Config.SetSetting("filelocation_headercommonpy", filelocation.FullName);
-            }
+            filelocation = new FileInfo(Config.GetSetting("filelocation_pydir") + "header_common.py");
             StringValues = new SortedDictionary<String, String>();
-            UintValues = new SortedDictionary<String, Int64>();
+            IntValues = new SortedDictionary<String, Int64>();
         }
 
         #region fileread
@@ -73,7 +69,7 @@ namespace MBScriptEditor
 
         private static void parsevalues()
         {
-            UintValues.Clear();
+            IntValues.Clear();
             Int64 parsedval;
             //pass 1 just get plain long values
             foreach (KeyValuePair<String, String> kvp in StringValues)
@@ -82,7 +78,7 @@ namespace MBScriptEditor
                 if (Int64.TryParse(kvp.Value, out parsedval) || (kvp.Value.StartsWith("0x") &&
                     Int64.TryParse(kvp.Value.Substring(2), System.Globalization.NumberStyles.AllowHexSpecifier, null, out parsedval)))
                 {
-                    UintValues.Add(kvp.Key, parsedval);
+                    IntValues.Add(kvp.Key, parsedval);
                 }
             }
             //now run through them again with the literals defined
@@ -98,7 +94,7 @@ namespace MBScriptEditor
                 allaccounted = true;
                 foreach (KeyValuePair<String, String> kvp in StringValues)
                 {
-                    if (!UintValues.ContainsKey(kvp.Key))
+                    if (!IntValues.ContainsKey(kvp.Key))
                     {
                         allaccounted = false;
                         break;
@@ -108,9 +104,9 @@ namespace MBScriptEditor
             }
             foreach (KeyValuePair<String, String> kvp in StringValues)
             {
-                if (!UintValues.ContainsKey(kvp.Key))
+                if (!IntValues.ContainsKey(kvp.Key))
                 {
-                    UintValues.Add(kvp.Key, 0);
+                    IntValues.Add(kvp.Key, 0);
                 }
             }
         }
@@ -124,11 +120,11 @@ namespace MBScriptEditor
             String[] splitter;
             foreach (KeyValuePair<String, String> kvp in StringValues)
             {
-                if (!UintValues.ContainsKey(kvp.Key))
+                if (!IntValues.ContainsKey(kvp.Key))
                 {
-                    if (UintValues.ContainsKey(kvp.Value))
+                    if (IntValues.ContainsKey(kvp.Value))
                     {//just a straight a=b
-                        UintValues.Add(kvp.Key, UintValues[kvp.Value]);
+                        IntValues.Add(kvp.Key, IntValues[kvp.Value]);
                     }
                     else
                     {
@@ -147,14 +143,14 @@ namespace MBScriptEditor
                                 if (Int64.TryParse(workingval, out tempval)) { parsedval += tempval; }
                                 else
                                 {
-                                    if (UintValues.ContainsKey(workingval)) { parsedval += UintValues[workingval]; }
+                                    if (IntValues.ContainsKey(workingval)) { parsedval += IntValues[workingval]; }
                                     else
                                     {//problem!
                                         Console.WriteLine("Unknown value {0}", workingval);
                                     }
                                 }
                             }
-                            UintValues.Add(kvp.Key, parsedval);
+                            IntValues.Add(kvp.Key, parsedval);
                         }
                         //bitshift, not allowing more than 2 vars
                         indexsplit = workingval.IndexOf("<<");
@@ -162,13 +158,13 @@ namespace MBScriptEditor
                         {//hit on add
                             splitter = new String[] { workingval.Remove(indexsplit).Trim(), workingval.Substring(indexsplit + 2).Trim() };
                             if (Int64.TryParse(splitter[0], out tempval)) { parsedval = tempval; }
-                            else if (UintValues.ContainsKey(splitter[0])) { parsedval = UintValues[splitter[0]]; }
+                            else if (IntValues.ContainsKey(splitter[0])) { parsedval = IntValues[splitter[0]]; }
                             tempval = 0; //just in case
                             //now check second, will end up doing parsedval << tempval
                             if (!Int64.TryParse(splitter[1], out tempval) &&
-                                UintValues.ContainsKey(splitter[1])) { tempval = UintValues[splitter[1]]; }
+                                IntValues.ContainsKey(splitter[1])) { tempval = IntValues[splitter[1]]; }
                             parsedval = parsedval << (Int32)tempval;
-                            if (tempval > 0) { UintValues.Add(kvp.Key, parsedval); } //if it's 0 we just shifted 0 which i would hope is not a real value
+                            if (tempval > 0) { IntValues.Add(kvp.Key, parsedval); } //if it's 0 we just shifted 0 which i would hope is not a real value
                         }
                         //XOR, not allowing more than 2 vars
                         indexsplit = workingval.IndexOf('|');
@@ -176,13 +172,13 @@ namespace MBScriptEditor
                         {//hit on add
                             splitter = new String[] { workingval.Remove(indexsplit).Trim(), workingval.Substring(indexsplit + 1).Trim() };                         
                             if (Int64.TryParse(splitter[0], out tempval)) { parsedval = tempval; }
-                            else if (UintValues.ContainsKey(splitter[0])) { parsedval = UintValues[splitter[0]]; }
+                            else if (IntValues.ContainsKey(splitter[0])) { parsedval = IntValues[splitter[0]]; }
                             tempval = 0; //just in case
                             //now check second, will end up doing parsedval << tempval
                             if (!Int64.TryParse(splitter[1], out tempval) &&
-                            UintValues.ContainsKey(splitter[1])) { tempval = UintValues[splitter[1]]; }
+                            IntValues.ContainsKey(splitter[1])) { tempval = IntValues[splitter[1]]; }
                             parsedval |= (UInt32)tempval;
-                            if (tempval > 0) { UintValues.Add(kvp.Key, parsedval); } //if it's 0 we just XOR'd 0 which i would hope is not a real value                            
+                            if (tempval > 0) { IntValues.Add(kvp.Key, parsedval); } //if it's 0 we just XOR'd 0 which i would hope is not a real value                            
                         }
                     }
                 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace MBScriptEditor
+namespace MBModViewer
 {
     static class Program
     {
@@ -14,7 +14,7 @@ namespace MBScriptEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new ScriptForm());
             Config.SaveAll();
         }
     }
