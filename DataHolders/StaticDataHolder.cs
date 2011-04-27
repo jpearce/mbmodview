@@ -10,12 +10,28 @@ namespace MBModViewer
         internal static DataItemSettings[] ItemSettings;
         internal static DataReaderSettings[] ReaderSettings;
         internal static DataReader[] DataReaders;
+        internal static PythonReader Header_Common;
+        internal static PythonReader Header_Operations;
 
         internal static void LoadAll()
         {
             LoadDataItems();
             LoadDataReaders();
             CreateDataReaders();
+            ReadHeaderCommon();
+            ReadHeaderOperations();            
+        }
+
+        internal static void ReadHeaderCommon()
+        {
+            Header_Common = new PythonReader(null, Config.GetSetting("filelocation_pydir") + "header_common.py");
+            Header_Common.Read();
+        }
+
+        internal static void ReadHeaderOperations()
+        {
+            Header_Operations = new PythonReader(null, Config.GetSetting("filelocation_pydir") + "header_operations.py");
+            Header_Operations.Read();
         }
 
         internal static String FindVarName(String typename, Int32 ID)
@@ -25,7 +41,7 @@ namespace MBModViewer
             {
                 if (tofind == DataReaders[i].Name)
                 {
-                    return "\"" + (typename == "$globalvar" ? "$" : typename == "!qstring" ? "@" : String.Empty) +
+                    return "\"" + (typename == "[variable]" ? "$" : typename == "[quick_string]" ? "@" : String.Empty) +
                         DataReaders[i].Items[ID].Name + "\"";
                 }
             }

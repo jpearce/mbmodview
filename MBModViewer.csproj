@@ -47,11 +47,11 @@
     <Compile Include="Readers\DataReaderSettings.cs" />
     <Compile Include="Readers\LineItemTypes.cs" />
     <Compile Include="DataHolders\StaticDataHolder.cs" />
-    <Compile Include="DataHolders\Header_Operations.cs" />
-    <Compile Include="DataHolders\Header_Common.cs" />
     <Compile Include="Readers\DataContainer.cs" />
     <Compile Include="Readers\DataItem.cs" />
     <Compile Include="Readers\DataReader.cs" />
+    <Compile Include="Readers\PythonDataItem.cs" />
+    <Compile Include="Readers\PythonReader.cs" />
     <Compile Include="ScriptForm.cs">
       <SubType>Form</SubType>
     </Compile>

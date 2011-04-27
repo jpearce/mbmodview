@@ -25,46 +25,56 @@ namespace MBModViewer
         private static void setvarmasks()
         {//put them in a lookup so we can determine on the fly what they are
             varmasks = new Dictionary<long, string>();
-            if(Header_Common.IntValues.ContainsKey("op_num_value_bits"))
+            if(StaticDataHolder.Header_Common.HaveKeyWithValue("op_num_value_bits"))
             {
-                bitshifts = (Int32)Header_Common.IntValues["op_num_value_bits"];
+                bitshifts = (Int32)StaticDataHolder.Header_Common.KeyValue("op_num_value_bits");
                 minvaluebitshift = 1 << bitshifts;
-                foreach(KeyValuePair<String, Int64> kvp in Header_Common.IntValues)
+                foreach(PythonDataItem pdi in StaticDataHolder.Header_Common.PythonItems)
                 {
-                    if (kvp.Value >= minvaluebitshift)
-                    {
-                        switch (kvp.Key)
-                        {
-                            case "opmask_local_variable":
-                                varmasks.Add(kvp.Value, "[localvar]");
-                                break;
-                            case "opmask_variable":
-                                varmasks.Add(kvp.Value, "$globalvar");
-                                break;
-                            case "opmask_register":
-                                varmasks.Add(kvp.Value, "#register");
-                                break;
-                            case "opmask_quest_index":
-                                varmasks.Add(kvp.Value, "@questvar");
-                                break;
-                            case "opmask_quick_string":
-                                varmasks.Add(kvp.Value, "!qstring");
-                                break;
-                            default:
-                                if (!kvp.Key.StartsWith("reg"))
-                                {
-                                    varmasks.Add(kvp.Value, String.Format("[{0}]", kvp.Key));//already masked                                
-                                }
-                                break;
-                        }
-                    }
-                    else if (kvp.Key.StartsWith("tag_") && kvp.Key.Length > 4)
+                    if (pdi.Value >= minvaluebitshift)
                     {
                         try
                         {
-                            if (!varmasks.ContainsKey((kvp.Value << bitshifts)))
+                            switch (pdi.Name)
                             {
-                                varmasks.Add(kvp.Value << bitshifts, String.Format("[{0}]", kvp.Key.Substring(4)));
+                                case "opmask_local_variable":
+                                    varmasks.Add(pdi.Value, "[localvar]");
+                                    break;
+                                case "opmask_variable":
+                                    varmasks.Add(pdi.Value, "$globalvar");
+                                    break;
+                                case "opmask_register":
+                                    varmasks.Add(pdi.Value, "#register");
+                                    break;
+                                case "opmask_quest_index":
+                                    varmasks.Add(pdi.Value, "@questvar");
+                                    break;
+                                case "opmask_quick_string":
+                                    varmasks.Add(pdi.Value, "!qstring");
+                                    break;
+                                default:
+                                    if (!pdi.Name.StartsWith("reg"))
+                                    {
+
+                                        varmasks.Add(pdi.Value, String.Format("[{0}]", pdi.Name));//already masked                                
+
+                                    }
+
+                                    break;
+                            }
+                        }
+                        catch (System.ArgumentException ex)
+                        {//already in the dictionary
+
+                        }
+                    }
+                    else if (pdi.Name.StartsWith("tag_") && pdi.Name.Length > 4)
+                    {
+                        try
+                        {
+                            if (!varmasks.ContainsKey((pdi.Value << bitshifts)))
+                            {
+                                varmasks.Add(pdi.Value << bitshifts, String.Format("[{0}]", pdi.Name.Substring(4)));
                             }
                         }
                         catch (Exception ex)
@@ -258,28 +268,45 @@ namespace MBModViewer
         private static String translateOperation(Int64 refnum)
         {
             String retVal = String.Empty;
-            if (Header_Operations.IDValues.ContainsKey(refnum)) { retVal += Header_Operations.IDValues[refnum]; }
+            if (StaticDataHolder.Header_Operations.HaveValue(refnum)) 
+            {
+                retVal += StaticDataHolder.Header_Operations.ValueKey(refnum);
+            }
             else
-            {//check for OR operations
-                Int64 testval1 = 0;
-                String testval1str = String.Empty;
-                foreach (KeyValuePair<Int64, String> kvp in Header_Operations.IDValues)
+            {//check for OR operations                               
+                for (int i = 0; i < StaticDataHolder.Header_Operations.PythonItems.Length && ReferenceEquals(retVal, String.Empty); ++i)
                 {
-                    //seems to be small|big in general
-                    testval1 = kvp.Key;
-                    testval1str = kvp.Value;
-                    foreach (KeyValuePair<String, Int64> kvp2 in Header_Operations.StringValues)
-                    {//having 2 diff dictionaries comes in handy
-                        if (kvp.Key > 64)//weed out some of the smaller ones
-                        {                            
-                            if ((testval1 | kvp2.Value) == refnum)
-                            {
-                                retVal += testval1str + "|" + kvp2.Key;
-                                break;
-                            }   
-                        }                        
+                    for (int j = 0; j < i; ++j)
+                    {//n^2 :(
+                        if ((StaticDataHolder.Header_Operations.PythonItems[i].Value |
+                            StaticDataHolder.Header_Operations.PythonItems[j].Value) == refnum)
+                        {
+                            retVal = StaticDataHolder.Header_Operations.PythonItems[i].Name + "|" +
+                                    StaticDataHolder.Header_Operations.PythonItems[j].Name;
+                            //add this so next time we don't have to do this again                            
+                            StaticDataHolder.Header_Operations.AddItem(retVal,
+                                (StaticDataHolder.Header_Operations.PythonItems[i].Value |
+                                    StaticDataHolder.Header_Operations.PythonItems[j].Value));
+                            break;
+                        }
                     }
-                    if (!ReferenceEquals(retVal, String.Empty)) { break; }
+                    if (ReferenceEquals(retVal, String.Empty))
+                    {
+                        for (int j = i + 1; j < StaticDataHolder.Header_Operations.PythonItems.Length; ++j)
+                        {//n^2 :(
+                            if ((StaticDataHolder.Header_Operations.PythonItems[i].Value |
+                                StaticDataHolder.Header_Operations.PythonItems[j].Value) == refnum)
+                            {
+                                retVal = StaticDataHolder.Header_Operations.PythonItems[i].Name + "|" +
+                                        StaticDataHolder.Header_Operations.PythonItems[j].Name;
+                                //add this so next time we don't have to do this again                            
+                                StaticDataHolder.Header_Operations.AddItem(retVal,
+                                    (StaticDataHolder.Header_Operations.PythonItems[i].Value |
+                                        StaticDataHolder.Header_Operations.PythonItems[j].Value));
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             if (String.ReferenceEquals(retVal, String.Empty)) { retVal = "UNKNOWN_OPERATION#" + refnum.ToString(); }
@@ -351,7 +378,7 @@ namespace MBModViewer
                     //case "!qstring":
                     //    retVal = "\"" + Module_QString.QStringNames[val] + "\"";
                     //    break;
-                    case "[localvar]":
+                    case "[local_variable]":
                         retVal = "\":local" + val.ToString() + "\""; 
                         break;
                     case "#register":
@@ -361,8 +388,8 @@ namespace MBModViewer
                     //    retVal = "\"$" + Module_Variable.GlobalVarNames[val] + "\""; 
                     //    break;
 
-                    default:
-                        retVal = StaticDataHolder.FindVarName(type, (Int32)val);                         
+                    default:                        
+                        retVal = StaticDataHolder.FindVarName(type, (Int32)val);
                         break;
                 }
             }

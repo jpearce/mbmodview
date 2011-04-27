@@ -47,6 +47,16 @@
             this.lv_Ops = new System.Windows.Forms.ListView();
             this.lvOps_col0 = new System.Windows.Forms.ColumnHeader();
             this.lvOps_col1 = new System.Windows.Forms.ColumnHeader();
+            this.tab_Modvars = new System.Windows.Forms.TabPage();
+            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
+            this.lb_mvtypes = new System.Windows.Forms.ListBox();
+            this.lb_mvnames = new System.Windows.Forms.ListBox();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.lv_mvvals = new System.Windows.Forms.ListView();
+            this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -95,16 +105,6 @@
             this.listView5 = new System.Windows.Forms.ListView();
             this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
-            this.tab_Modvars = new System.Windows.Forms.TabPage();
-            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.lv_mvvals = new System.Windows.Forms.ListView();
-            this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
-            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
-            this.lb_mvtypes = new System.Windows.Forms.ListBox();
-            this.lb_mvnames = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tab_Scripts.SuspendLayout();
@@ -115,6 +115,15 @@
             this.groupBox2.SuspendLayout();
             this.tab_Const.SuspendLayout();
             this.tab_Operations.SuspendLayout();
+            this.tab_Modvars.SuspendLayout();
+            this.splitContainer6.Panel1.SuspendLayout();
+            this.splitContainer6.Panel2.SuspendLayout();
+            this.splitContainer6.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.splitContainer7.Panel1.SuspendLayout();
+            this.splitContainer7.Panel2.SuspendLayout();
+            this.splitContainer7.SuspendLayout();
+            this.groupBox12.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -144,15 +153,6 @@
             this.groupBox10.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage9.SuspendLayout();
-            this.tab_Modvars.SuspendLayout();
-            this.splitContainer6.Panel1.SuspendLayout();
-            this.splitContainer6.Panel2.SuspendLayout();
-            this.splitContainer6.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.groupBox12.SuspendLayout();
-            this.splitContainer7.Panel1.SuspendLayout();
-            this.splitContainer7.Panel2.SuspendLayout();
-            this.splitContainer7.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -176,7 +176,7 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // tabControl1
@@ -270,6 +270,7 @@
             this.rtbScript.TabIndex = 0;
             this.rtbScript.Text = "";
             this.rtbScript.WordWrap = false;
+            this.rtbScript.TextChanged += new System.EventHandler(this.rtbScript_TextChanged);
             // 
             // tab_Const
             // 
@@ -305,12 +306,12 @@
             // lvConst_col1
             // 
             this.lvConst_col1.Text = "Value";
-            this.lvConst_col1.Width = 174;
+            this.lvConst_col1.Width = 150;
             // 
             // lvConst_col2
             // 
             this.lvConst_col2.Text = "String";
-            this.lvConst_col2.Width = 460;
+            this.lvConst_col2.Width = 400;
             // 
             // tab_Operations
             // 
@@ -346,6 +347,117 @@
             // 
             this.lvOps_col1.Text = "Value";
             this.lvOps_col1.Width = 174;
+            // 
+            // tab_Modvars
+            // 
+            this.tab_Modvars.Controls.Add(this.splitContainer6);
+            this.tab_Modvars.Location = new System.Drawing.Point(4, 22);
+            this.tab_Modvars.Name = "tab_Modvars";
+            this.tab_Modvars.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Modvars.Size = new System.Drawing.Size(1001, 451);
+            this.tab_Modvars.TabIndex = 3;
+            this.tab_Modvars.Text = "Mod Variables";
+            this.tab_Modvars.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer6
+            // 
+            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer6.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer6.Name = "splitContainer6";
+            // 
+            // splitContainer6.Panel1
+            // 
+            this.splitContainer6.Panel1.Controls.Add(this.groupBox11);
+            // 
+            // splitContainer6.Panel2
+            // 
+            this.splitContainer6.Panel2.Controls.Add(this.groupBox12);
+            this.splitContainer6.Size = new System.Drawing.Size(995, 445);
+            this.splitContainer6.SplitterDistance = 519;
+            this.splitContainer6.TabIndex = 2;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.splitContainer7);
+            this.groupBox11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox11.Location = new System.Drawing.Point(0, 0);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(519, 445);
+            this.groupBox11.TabIndex = 0;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Variables";
+            // 
+            // splitContainer7
+            // 
+            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer7.Location = new System.Drawing.Point(3, 16);
+            this.splitContainer7.Name = "splitContainer7";
+            // 
+            // splitContainer7.Panel1
+            // 
+            this.splitContainer7.Panel1.Controls.Add(this.lb_mvtypes);
+            // 
+            // splitContainer7.Panel2
+            // 
+            this.splitContainer7.Panel2.Controls.Add(this.lb_mvnames);
+            this.splitContainer7.Size = new System.Drawing.Size(513, 426);
+            this.splitContainer7.SplitterDistance = 252;
+            this.splitContainer7.TabIndex = 0;
+            // 
+            // lb_mvtypes
+            // 
+            this.lb_mvtypes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lb_mvtypes.FormattingEnabled = true;
+            this.lb_mvtypes.Location = new System.Drawing.Point(0, 0);
+            this.lb_mvtypes.Name = "lb_mvtypes";
+            this.lb_mvtypes.Size = new System.Drawing.Size(252, 420);
+            this.lb_mvtypes.TabIndex = 0;
+            this.lb_mvtypes.SelectedIndexChanged += new System.EventHandler(this.lb_mvtypes_SelectedIndexChanged);
+            // 
+            // lb_mvnames
+            // 
+            this.lb_mvnames.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lb_mvnames.FormattingEnabled = true;
+            this.lb_mvnames.Location = new System.Drawing.Point(0, 0);
+            this.lb_mvnames.Name = "lb_mvnames";
+            this.lb_mvnames.Size = new System.Drawing.Size(257, 420);
+            this.lb_mvnames.TabIndex = 1;
+            this.lb_mvnames.SelectedIndexChanged += new System.EventHandler(this.lb_mvnames_SelectedIndexChanged);
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.lv_mvvals);
+            this.groupBox12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox12.Location = new System.Drawing.Point(0, 0);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(472, 445);
+            this.groupBox12.TabIndex = 0;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Variable Values";
+            // 
+            // lv_mvvals
+            // 
+            this.lv_mvvals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader15,
+            this.columnHeader16});
+            this.lv_mvvals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lv_mvvals.Location = new System.Drawing.Point(3, 16);
+            this.lv_mvvals.MultiSelect = false;
+            this.lv_mvvals.Name = "lv_mvvals";
+            this.lv_mvvals.Size = new System.Drawing.Size(466, 426);
+            this.lv_mvvals.TabIndex = 1;
+            this.lv_mvvals.UseCompatibleStateImageBehavior = false;
+            this.lv_mvvals.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Name";
+            this.columnHeader15.Width = 150;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "Value";
+            this.columnHeader16.Width = 400;
             // 
             // tabPage1
             // 
@@ -846,117 +958,6 @@
             this.columnHeader14.Text = "Value";
             this.columnHeader14.Width = 174;
             // 
-            // tab_Modvars
-            // 
-            this.tab_Modvars.Controls.Add(this.splitContainer6);
-            this.tab_Modvars.Location = new System.Drawing.Point(4, 22);
-            this.tab_Modvars.Name = "tab_Modvars";
-            this.tab_Modvars.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Modvars.Size = new System.Drawing.Size(1001, 451);
-            this.tab_Modvars.TabIndex = 3;
-            this.tab_Modvars.Text = "Mod Variables";
-            this.tab_Modvars.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer6
-            // 
-            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer6.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer6.Name = "splitContainer6";
-            // 
-            // splitContainer6.Panel1
-            // 
-            this.splitContainer6.Panel1.Controls.Add(this.groupBox11);
-            // 
-            // splitContainer6.Panel2
-            // 
-            this.splitContainer6.Panel2.Controls.Add(this.groupBox12);
-            this.splitContainer6.Size = new System.Drawing.Size(995, 445);
-            this.splitContainer6.SplitterDistance = 519;
-            this.splitContainer6.TabIndex = 2;
-            // 
-            // groupBox11
-            // 
-            this.groupBox11.Controls.Add(this.splitContainer7);
-            this.groupBox11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox11.Location = new System.Drawing.Point(0, 0);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(519, 445);
-            this.groupBox11.TabIndex = 0;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Variables";
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.lv_mvvals);
-            this.groupBox12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox12.Location = new System.Drawing.Point(0, 0);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(472, 445);
-            this.groupBox12.TabIndex = 0;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Variable Values";
-            // 
-            // lv_mvvals
-            // 
-            this.lv_mvvals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader15,
-            this.columnHeader16});
-            this.lv_mvvals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lv_mvvals.Location = new System.Drawing.Point(3, 16);
-            this.lv_mvvals.MultiSelect = false;
-            this.lv_mvvals.Name = "lv_mvvals";
-            this.lv_mvvals.Size = new System.Drawing.Size(466, 426);
-            this.lv_mvvals.TabIndex = 1;
-            this.lv_mvvals.UseCompatibleStateImageBehavior = false;
-            this.lv_mvvals.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader15
-            // 
-            this.columnHeader15.Text = "Name";
-            this.columnHeader15.Width = 150;
-            // 
-            // columnHeader16
-            // 
-            this.columnHeader16.Text = "Value";
-            this.columnHeader16.Width = 400;
-            // 
-            // splitContainer7
-            // 
-            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer7.Location = new System.Drawing.Point(3, 16);
-            this.splitContainer7.Name = "splitContainer7";
-            // 
-            // splitContainer7.Panel1
-            // 
-            this.splitContainer7.Panel1.Controls.Add(this.lb_mvtypes);
-            // 
-            // splitContainer7.Panel2
-            // 
-            this.splitContainer7.Panel2.Controls.Add(this.lb_mvnames);
-            this.splitContainer7.Size = new System.Drawing.Size(513, 426);
-            this.splitContainer7.SplitterDistance = 252;
-            this.splitContainer7.TabIndex = 0;
-            // 
-            // lb_mvtypes
-            // 
-            this.lb_mvtypes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lb_mvtypes.FormattingEnabled = true;
-            this.lb_mvtypes.Location = new System.Drawing.Point(0, 0);
-            this.lb_mvtypes.Name = "lb_mvtypes";
-            this.lb_mvtypes.Size = new System.Drawing.Size(252, 420);
-            this.lb_mvtypes.TabIndex = 0;
-            this.lb_mvtypes.SelectedIndexChanged += new System.EventHandler(this.lb_mvtypes_SelectedIndexChanged);
-            // 
-            // lb_mvnames
-            // 
-            this.lb_mvnames.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lb_mvnames.FormattingEnabled = true;
-            this.lb_mvnames.Location = new System.Drawing.Point(0, 0);
-            this.lb_mvnames.Name = "lb_mvnames";
-            this.lb_mvnames.Size = new System.Drawing.Size(257, 420);
-            this.lb_mvnames.TabIndex = 1;
-            this.lb_mvnames.SelectedIndexChanged += new System.EventHandler(this.lb_mvnames_SelectedIndexChanged);
-            // 
             // ScriptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -979,6 +980,15 @@
             this.groupBox2.ResumeLayout(false);
             this.tab_Const.ResumeLayout(false);
             this.tab_Operations.ResumeLayout(false);
+            this.tab_Modvars.ResumeLayout(false);
+            this.splitContainer6.Panel1.ResumeLayout(false);
+            this.splitContainer6.Panel2.ResumeLayout(false);
+            this.splitContainer6.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
+            this.splitContainer7.Panel1.ResumeLayout(false);
+            this.splitContainer7.Panel2.ResumeLayout(false);
+            this.splitContainer7.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -1011,15 +1021,6 @@
             this.groupBox10.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.tabPage9.ResumeLayout(false);
-            this.tab_Modvars.ResumeLayout(false);
-            this.splitContainer6.Panel1.ResumeLayout(false);
-            this.splitContainer6.Panel2.ResumeLayout(false);
-            this.splitContainer6.ResumeLayout(false);
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox12.ResumeLayout(false);
-            this.splitContainer7.Panel1.ResumeLayout(false);
-            this.splitContainer7.Panel2.ResumeLayout(false);
-            this.splitContainer7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

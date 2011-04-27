@@ -9,13 +9,17 @@ namespace MBModViewer
     /// <summary>Generic class for python/ssv readers and formatting of DataItems.</summary>
     internal class DataReader
     {
+        #region properties
         internal virtual FileInfo SourceFile { get { return _settings.FileLocation; } }
         internal virtual DataItem[] Items { get { return _items; } }
         internal virtual String Name { get { return this._settings.Name; } }
         internal virtual String ItemType { get { return this._settings.DataType.Name; } }
+        #endregion
 
+        #region fields
         protected DataItem[] _items;
         internal DataReaderSettings _settings;
+        #endregion
 
         /// <summary>Generic read function.  Contains a while(ReadLine()) loop and close.</summary>
         internal virtual void Read()
@@ -32,19 +36,8 @@ namespace MBModViewer
                 {
                     do
                     {
-                        try
-                        {
-                            if (this.Name == "troop")
-                            {
-                                Console.Write("");
-                            }
-                            tempitems.Add(newitem);
-                            newitem = ReadItem(tr, tempitems.Count - 1);
-                        }
-                        catch
-                        {
-                            Console.Write(tempitems.Count);
-                        }
+                        tempitems.Add(newitem);
+                        newitem = ReadItem(tr, tempitems.Count - 1);
                     }
                     while (newitem != null);
                 }
@@ -58,6 +51,7 @@ namespace MBModViewer
             DataItem newitem = new DataItem(CurrentIndex);
             String linestr = reader.ReadLine();
             //temp hack for nonstandards like items with 3 OR 4 lines
+            //until i think of a good xml solution for ~4 different weird options
             switch (this._settings.Name)
             {
                 case "faction"://lines actually repeat into the next with a 0 for w/e reason
@@ -73,11 +67,14 @@ namespace MBModViewer
                 case "scene_prop"://can be up to 3+ extra lines
                     while (linestr != null && !linestr.StartsWith("spr_")) { linestr = reader.ReadLine(); }                    
                     break;
-                case "mission_template"://can be monstrous
-                    while (linestr != null && !linestr.StartsWith("mts_")) { linestr = reader.ReadLine(); }
+                case "mission_tpl"://can be monstrous
+                    while (linestr != null && !linestr.StartsWith("mst_")) { linestr = reader.ReadLine(); }
                     break;
                 case "action"://weird one, basically if it's got 1 space it's good if it's 2 then keep going
                     while (linestr != null && linestr.StartsWith("  ")) { linestr = reader.ReadLine(); }
+                    break;
+                case "map_icon"://can have an extra blank line
+                    while (linestr != null && linestr.Equals(String.Empty)) { linestr = reader.ReadLine(); }
                     break;
                 case "presentation"://can be up to 3+ extra lines
                     while (linestr != null && !linestr.StartsWith("prsnt_")) { linestr = reader.ReadLine(); }
