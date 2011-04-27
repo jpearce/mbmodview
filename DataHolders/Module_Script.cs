@@ -14,6 +14,10 @@ namespace MBModViewer
         private static Int64 minvaluebitshift;
         private static Int32 bitshifts;
         private static Dictionary<Int64, String> varmasks;
+        /// <summary>list of possible or operations as in op1|op2 since there are several combinations that overlap
+        /// if it's allowed to look at all ops</summary>
+        private static HashSet<String> oroplist = 
+            new HashSet<string>(new String[] { "this_or_next", "neg", "eq",  "neq", "lt", "le", "gt", "ge" });
 
         /// <summary>Static initializer</summary>
         static Module_Script()
@@ -222,27 +226,35 @@ namespace MBModViewer
         private static void translateLine(ref Int64[] contents, ref Int32 index, ref List<String> statements, ref int indents)
         {
             String workstr = translateOperation(contents[index]);
+            bool postindent = false; //we want to indent AFTER the try so it reads
+            //try_begin
+            //[indent]statement
+            //try_end
             if (contents.Length > ++index)
             {
                 switch (workstr)
                 {
                     case "try_begin":
-                        ++indents;
-                        break;
-                    case "try_end":
-                        --indents;
-                        break;
+                        postindent = true;
+                        break;                    
                     case "try_for_range":
-                        ++indents;
+                        postindent = true;
                         break;
                     case "try_for_range_backwards":
-                        ++indents;
+                        postindent = true;
                         break;
                     case "try_for_parties":
-                        ++indents;
+                        postindent = true;
                         break;
                     case "try_for_agents":
-                        ++indents;
+                        postindent = true;
+                        break;
+                    case "else_try":
+                        if (indents > 0) { --indents; }
+                        postindent = true; //drop it down 1 then put it back
+                        break;
+                    case "try_end":
+                        if (indents > 0) { --indents; }
                         break;
                 }
                 workstr = "(" + workstr;
@@ -257,11 +269,12 @@ namespace MBModViewer
                         if (++index < statementend) { workstr += ", "; }
                     }
                     --index;
-
                 }
                 workstr += "),";
+                
             }
             statements.Add(doIndents(indents, workstr));
+            if (postindent) { ++indents; }
         }
 
         
@@ -273,26 +286,12 @@ namespace MBModViewer
                 retVal += StaticDataHolder.Header_Operations.ValueKey(refnum);
             }
             else
-            {//check for OR operations                               
+            {//check for OR operations, one of them must be in oroplist                             
                 for (int i = 0; i < StaticDataHolder.Header_Operations.PythonItems.Length && ReferenceEquals(retVal, String.Empty); ++i)
                 {
-                    for (int j = 0; j < i; ++j)
-                    {//n^2 :(
-                        if ((StaticDataHolder.Header_Operations.PythonItems[i].Value |
-                            StaticDataHolder.Header_Operations.PythonItems[j].Value) == refnum)
-                        {
-                            retVal = StaticDataHolder.Header_Operations.PythonItems[i].Name + "|" +
-                                    StaticDataHolder.Header_Operations.PythonItems[j].Name;
-                            //add this so next time we don't have to do this again                            
-                            StaticDataHolder.Header_Operations.AddItem(retVal,
-                                (StaticDataHolder.Header_Operations.PythonItems[i].Value |
-                                    StaticDataHolder.Header_Operations.PythonItems[j].Value));
-                            break;
-                        }
-                    }
-                    if (ReferenceEquals(retVal, String.Empty))
+                    if (oroplist.Contains(StaticDataHolder.Header_Operations.PythonItems[i].Name))
                     {
-                        for (int j = i + 1; j < StaticDataHolder.Header_Operations.PythonItems.Length; ++j)
+                        for (int j = 0; j < i; ++j)
                         {//n^2 :(
                             if ((StaticDataHolder.Header_Operations.PythonItems[i].Value |
                                 StaticDataHolder.Header_Operations.PythonItems[j].Value) == refnum)
@@ -304,6 +303,23 @@ namespace MBModViewer
                                     (StaticDataHolder.Header_Operations.PythonItems[i].Value |
                                         StaticDataHolder.Header_Operations.PythonItems[j].Value));
                                 break;
+                            }
+                        }
+                        if (ReferenceEquals(retVal, String.Empty))
+                        {
+                            for (int j = i + 1; j < StaticDataHolder.Header_Operations.PythonItems.Length; ++j)
+                            {//n^2 :(
+                                if ((StaticDataHolder.Header_Operations.PythonItems[i].Value |
+                                    StaticDataHolder.Header_Operations.PythonItems[j].Value) == refnum)
+                                {
+                                    retVal = StaticDataHolder.Header_Operations.PythonItems[i].Name + "|" +
+                                            StaticDataHolder.Header_Operations.PythonItems[j].Name;
+                                    //add this so next time we don't have to do this again                            
+                                    StaticDataHolder.Header_Operations.AddItem(retVal,
+                                        (StaticDataHolder.Header_Operations.PythonItems[i].Value |
+                                            StaticDataHolder.Header_Operations.PythonItems[j].Value));
+                                    break;
+                                }
                             }
                         }
                     }
@@ -344,50 +360,13 @@ namespace MBModViewer
                 {
                     case "[script]":
                         retVal = "\"script_" + scripts[val].ScriptName + "\"";
-                        break;
-                    //case "[faction]":
-                    //    retVal = "\"" + Module_Faction.FactionNames[val] + "\""; 
-                    //    break;
-                    //case "[troop]":
-                    //    retVal = "\"" + Module_Troop.TroopNames[val] + "\""; 
-                    //    break;
-                    //case "[scene]":
-                    //    retVal = "\"" + Module_Scene.SceneNames[val] + "\"";                         
-                    //    break;
-                    //case "[scene_prop]":
-                    //    retVal = "\"" + Module_SceneProp.ScenePropNames[val] + "\"";
-                    //    break;
-                    //case "[item]":
-                    //    retVal = "\"" + Module_Item.ItemNames[val] + "\"";        
-                    //    break;
-                    //case "[mesh]":
-                    //    retVal = "\"" + Module_Mesh.MeshNames[val] + "\"";
-                    //    break;
-                    //case "[party]":
-                    //    retVal = "\"" + Module_Party.PartyNames[val] + "\"";
-                    //    break;
-                    //case "[string]":
-                    //    retVal = "\"" + Module_String.StringNames[val] + "\"";
-                    //    break;
-                    //case "[tableau]":
-                    //    retVal = "\"" + Module_Tableau.TableauNames[val] + "\"";
-                    //    break;
-                    //case "[party_tpl]":
-                    //    retVal = "\"" + Module_PartyTemplate.PartyTemplateNames[val] + "\"";
-                    //    break;
-                    //case "!qstring":
-                    //    retVal = "\"" + Module_QString.QStringNames[val] + "\"";
-                    //    break;
+                        break;                    
                     case "[local_variable]":
                         retVal = "\":local" + val.ToString() + "\""; 
                         break;
                     case "#register":
                         retVal = "reg" + val.ToString();
-                        break;
-                    //case "$globalvar":
-                    //    retVal = "\"$" + Module_Variable.GlobalVarNames[val] + "\""; 
-                    //    break;
-
+                        break;                    
                     default:                        
                         retVal = StaticDataHolder.FindVarName(type, (Int32)val);
                         break;

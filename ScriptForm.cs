@@ -170,7 +170,7 @@ namespace MBModViewer
                     ++linelen;
                     if (!commanddone && split[j].Length > 1)
                     {
-                        rtbhighlight(curlen + linelen, (split[j].Length - 1), Color.Blue, (split[j].Contains("try_")));
+                        rtbhighlight(curlen + linelen, (split[j].Length - 1), Color.Blue, (split[j].Contains("try_") || split[j].Contains("_try")));
                         commanddone = true;
                     }                    
                     else if (split[j].StartsWith("\"$"))
