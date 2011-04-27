@@ -12,6 +12,7 @@ namespace MBModViewer
         internal static DataReader[] DataReaders;
         internal static PythonReader Header_Common;
         internal static PythonReader Header_Operations;
+        internal static PythonReader Header_Triggers;
 
         internal static void LoadAll()
         {
@@ -19,7 +20,8 @@ namespace MBModViewer
             LoadDataReaders();
             CreateDataReaders();
             ReadHeaderCommon();
-            ReadHeaderOperations();            
+            ReadHeaderOperations();
+            ReadHeaderTriggers();
         }
 
         internal static void ReadHeaderCommon()
@@ -34,6 +36,12 @@ namespace MBModViewer
             Header_Operations.Read();
         }
 
+        internal static void ReadHeaderTriggers()
+        {
+            Header_Triggers = new PythonReader(null, Config.GetSetting("filelocation_pydir") + "header_triggers.py");
+            Header_Triggers.Read();
+        }
+
         internal static String FindVarName(String typename, Int32 ID)
         {
             String tofind = typename.Replace("[", String.Empty).Replace("]", string.Empty).Trim().ToLower();
@@ -43,6 +51,24 @@ namespace MBModViewer
                 {
                     return "\"" + (typename == "[variable]" ? "$" : typename == "[quick_string]" ? "@" : String.Empty) +
                         DataReaders[i].Items[ID].Name + "\"";
+                }
+            }
+            return null;
+        }
+
+        /// <summary>Since a true decompilation will show the string in a quickstring we show that</summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        internal static String FindQuickString(Int32 ID)
+        {           
+            
+            for (int i = 0; i < DataReaders.Length; ++i)
+            {
+                if (DataReaders[i].Name == "quick_string")
+                {
+                    String retVal = DataReaders[i].Items[ID].Source.Replace("\r", String.Empty).Replace("\n", String.Empty);
+                     if (retVal.IndexOf(' ') > -1) { return retVal.Substring(retVal.IndexOf(' ') + 1).Trim(); }
+                     return retVal.Trim();
                 }
             }
             return null;

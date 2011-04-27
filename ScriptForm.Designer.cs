@@ -38,6 +38,25 @@
             this.lbScripts = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rtbScript = new System.Windows.Forms.RichTextBox();
+            this.tab_Triggers = new System.Windows.Forms.TabPage();
+            this.splitContainer8 = new System.Windows.Forms.SplitContainer();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.lb_Triggers = new System.Windows.Forms.ListBox();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.splitContainer9 = new System.Windows.Forms.SplitContainer();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.lb_ti_once = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txt_TriggerRearm = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_TriggerDelay = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txt_TriggerCheck = new System.Windows.Forms.TextBox();
+            this.splitContainer10 = new System.Windows.Forms.SplitContainer();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.rtb_TriggerCondition = new System.Windows.Forms.RichTextBox();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.rtb_TriggerExecute = new System.Windows.Forms.RichTextBox();
             this.tab_Const = new System.Windows.Forms.TabPage();
             this.lvConst = new System.Windows.Forms.ListView();
             this.lvConst_col0 = new System.Windows.Forms.ColumnHeader();
@@ -113,6 +132,21 @@
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tab_Triggers.SuspendLayout();
+            this.splitContainer8.Panel1.SuspendLayout();
+            this.splitContainer8.Panel2.SuspendLayout();
+            this.splitContainer8.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.splitContainer9.Panel1.SuspendLayout();
+            this.splitContainer9.Panel2.SuspendLayout();
+            this.splitContainer9.SuspendLayout();
+            this.groupBox15.SuspendLayout();
+            this.splitContainer10.Panel1.SuspendLayout();
+            this.splitContainer10.Panel2.SuspendLayout();
+            this.splitContainer10.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            this.groupBox17.SuspendLayout();
             this.tab_Const.SuspendLayout();
             this.tab_Operations.SuspendLayout();
             this.tab_Modvars.SuspendLayout();
@@ -182,6 +216,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tab_Scripts);
+            this.tabControl1.Controls.Add(this.tab_Triggers);
             this.tabControl1.Controls.Add(this.tab_Const);
             this.tabControl1.Controls.Add(this.tab_Operations);
             this.tabControl1.Controls.Add(this.tab_Modvars);
@@ -270,7 +305,233 @@
             this.rtbScript.TabIndex = 0;
             this.rtbScript.Text = "";
             this.rtbScript.WordWrap = false;
-            this.rtbScript.TextChanged += new System.EventHandler(this.rtbScript_TextChanged);
+            this.rtbScript.TextChanged += new System.EventHandler(this.codeboxTextChange);
+            // 
+            // tab_Triggers
+            // 
+            this.tab_Triggers.Controls.Add(this.splitContainer8);
+            this.tab_Triggers.Location = new System.Drawing.Point(4, 22);
+            this.tab_Triggers.Name = "tab_Triggers";
+            this.tab_Triggers.Size = new System.Drawing.Size(1001, 451);
+            this.tab_Triggers.TabIndex = 4;
+            this.tab_Triggers.Text = "Triggers";
+            this.tab_Triggers.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer8
+            // 
+            this.splitContainer8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer8.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer8.Name = "splitContainer8";
+            // 
+            // splitContainer8.Panel1
+            // 
+            this.splitContainer8.Panel1.Controls.Add(this.groupBox13);
+            // 
+            // splitContainer8.Panel2
+            // 
+            this.splitContainer8.Panel2.Controls.Add(this.groupBox14);
+            this.splitContainer8.Size = new System.Drawing.Size(1001, 451);
+            this.splitContainer8.SplitterDistance = 168;
+            this.splitContainer8.TabIndex = 3;
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.lb_Triggers);
+            this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox13.Location = new System.Drawing.Point(0, 0);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(168, 451);
+            this.groupBox13.TabIndex = 0;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Triggers";
+            // 
+            // lb_Triggers
+            // 
+            this.lb_Triggers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lb_Triggers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Triggers.FormattingEnabled = true;
+            this.lb_Triggers.ItemHeight = 16;
+            this.lb_Triggers.Location = new System.Drawing.Point(3, 16);
+            this.lb_Triggers.Name = "lb_Triggers";
+            this.lb_Triggers.Size = new System.Drawing.Size(162, 420);
+            this.lb_Triggers.TabIndex = 0;
+            this.lb_Triggers.SelectedIndexChanged += new System.EventHandler(this.lb_Triggers_SelectedIndexChanged);
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.splitContainer9);
+            this.groupBox14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox14.Location = new System.Drawing.Point(0, 0);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(829, 451);
+            this.groupBox14.TabIndex = 0;
+            this.groupBox14.TabStop = false;
+            // 
+            // splitContainer9
+            // 
+            this.splitContainer9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer9.Location = new System.Drawing.Point(3, 16);
+            this.splitContainer9.Name = "splitContainer9";
+            this.splitContainer9.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer9.Panel1
+            // 
+            this.splitContainer9.Panel1.Controls.Add(this.groupBox15);
+            // 
+            // splitContainer9.Panel2
+            // 
+            this.splitContainer9.Panel2.Controls.Add(this.splitContainer10);
+            this.splitContainer9.Size = new System.Drawing.Size(823, 432);
+            this.splitContainer9.SplitterDistance = 75;
+            this.splitContainer9.TabIndex = 0;
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.lb_ti_once);
+            this.groupBox15.Controls.Add(this.label3);
+            this.groupBox15.Controls.Add(this.txt_TriggerRearm);
+            this.groupBox15.Controls.Add(this.label2);
+            this.groupBox15.Controls.Add(this.txt_TriggerDelay);
+            this.groupBox15.Controls.Add(this.label1);
+            this.groupBox15.Controls.Add(this.txt_TriggerCheck);
+            this.groupBox15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox15.Location = new System.Drawing.Point(0, 0);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(823, 75);
+            this.groupBox15.TabIndex = 0;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "Attributes";
+            // 
+            // lb_ti_once
+            // 
+            this.lb_ti_once.AutoSize = true;
+            this.lb_ti_once.Location = new System.Drawing.Point(483, 29);
+            this.lb_ti_once.Name = "lb_ti_once";
+            this.lb_ti_once.Size = new System.Drawing.Size(0, 13);
+            this.lb_ti_once.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(339, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "RearmDelay";
+            // 
+            // txt_TriggerRearm
+            // 
+            this.txt_TriggerRearm.Location = new System.Drawing.Point(409, 27);
+            this.txt_TriggerRearm.Name = "txt_TriggerRearm";
+            this.txt_TriggerRearm.Size = new System.Drawing.Size(68, 20);
+            this.txt_TriggerRearm.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(174, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "ExecuteDelay";
+            // 
+            // txt_TriggerDelay
+            // 
+            this.txt_TriggerDelay.Location = new System.Drawing.Point(253, 29);
+            this.txt_TriggerDelay.Name = "txt_TriggerDelay";
+            this.txt_TriggerDelay.Size = new System.Drawing.Size(68, 20);
+            this.txt_TriggerDelay.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "CheckInterval";
+            // 
+            // txt_TriggerCheck
+            // 
+            this.txt_TriggerCheck.Location = new System.Drawing.Point(86, 29);
+            this.txt_TriggerCheck.Name = "txt_TriggerCheck";
+            this.txt_TriggerCheck.Size = new System.Drawing.Size(68, 20);
+            this.txt_TriggerCheck.TabIndex = 0;
+            // 
+            // splitContainer10
+            // 
+            this.splitContainer10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer10.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer10.Name = "splitContainer10";
+            // 
+            // splitContainer10.Panel1
+            // 
+            this.splitContainer10.Panel1.Controls.Add(this.groupBox16);
+            // 
+            // splitContainer10.Panel2
+            // 
+            this.splitContainer10.Panel2.Controls.Add(this.groupBox17);
+            this.splitContainer10.Size = new System.Drawing.Size(823, 353);
+            this.splitContainer10.SplitterDistance = 386;
+            this.splitContainer10.TabIndex = 0;
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.rtb_TriggerCondition);
+            this.groupBox16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox16.Location = new System.Drawing.Point(0, 0);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(386, 353);
+            this.groupBox16.TabIndex = 1;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "Condition";
+            // 
+            // rtb_TriggerCondition
+            // 
+            this.rtb_TriggerCondition.AcceptsTab = true;
+            this.rtb_TriggerCondition.BackColor = System.Drawing.SystemColors.Window;
+            this.rtb_TriggerCondition.DetectUrls = false;
+            this.rtb_TriggerCondition.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_TriggerCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb_TriggerCondition.HideSelection = false;
+            this.rtb_TriggerCondition.Location = new System.Drawing.Point(3, 16);
+            this.rtb_TriggerCondition.Name = "rtb_TriggerCondition";
+            this.rtb_TriggerCondition.ReadOnly = true;
+            this.rtb_TriggerCondition.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rtb_TriggerCondition.Size = new System.Drawing.Size(380, 334);
+            this.rtb_TriggerCondition.TabIndex = 1;
+            this.rtb_TriggerCondition.Text = "";
+            this.rtb_TriggerCondition.WordWrap = false;
+            this.rtb_TriggerCondition.TextChanged += new System.EventHandler(this.codeboxTextChange);
+            // 
+            // groupBox17
+            // 
+            this.groupBox17.Controls.Add(this.rtb_TriggerExecute);
+            this.groupBox17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox17.Location = new System.Drawing.Point(0, 0);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(433, 353);
+            this.groupBox17.TabIndex = 1;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "Execute";
+            // 
+            // rtb_TriggerExecute
+            // 
+            this.rtb_TriggerExecute.AcceptsTab = true;
+            this.rtb_TriggerExecute.BackColor = System.Drawing.SystemColors.Window;
+            this.rtb_TriggerExecute.DetectUrls = false;
+            this.rtb_TriggerExecute.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_TriggerExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb_TriggerExecute.HideSelection = false;
+            this.rtb_TriggerExecute.Location = new System.Drawing.Point(3, 16);
+            this.rtb_TriggerExecute.Name = "rtb_TriggerExecute";
+            this.rtb_TriggerExecute.ReadOnly = true;
+            this.rtb_TriggerExecute.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rtb_TriggerExecute.Size = new System.Drawing.Size(427, 334);
+            this.rtb_TriggerExecute.TabIndex = 1;
+            this.rtb_TriggerExecute.Text = "";
+            this.rtb_TriggerExecute.WordWrap = false;
+            this.rtb_TriggerExecute.TextChanged += new System.EventHandler(this.codeboxTextChange);
             // 
             // tab_Const
             // 
@@ -978,6 +1239,22 @@
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.tab_Triggers.ResumeLayout(false);
+            this.splitContainer8.Panel1.ResumeLayout(false);
+            this.splitContainer8.Panel2.ResumeLayout(false);
+            this.splitContainer8.ResumeLayout(false);
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox14.ResumeLayout(false);
+            this.splitContainer9.Panel1.ResumeLayout(false);
+            this.splitContainer9.Panel2.ResumeLayout(false);
+            this.splitContainer9.ResumeLayout(false);
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
+            this.splitContainer10.Panel1.ResumeLayout(false);
+            this.splitContainer10.Panel2.ResumeLayout(false);
+            this.splitContainer10.ResumeLayout(false);
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox17.ResumeLayout(false);
             this.tab_Const.ResumeLayout(false);
             this.tab_Operations.ResumeLayout(false);
             this.tab_Modvars.ResumeLayout(false);
@@ -1105,6 +1382,25 @@
         private System.Windows.Forms.SplitContainer splitContainer7;
         private System.Windows.Forms.ListBox lb_mvtypes;
         private System.Windows.Forms.ListBox lb_mvnames;
+        private System.Windows.Forms.TabPage tab_Triggers;
+        private System.Windows.Forms.SplitContainer splitContainer8;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.ListBox lb_Triggers;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.SplitContainer splitContainer9;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.SplitContainer splitContainer10;
+        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.GroupBox groupBox17;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txt_TriggerCheck;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txt_TriggerDelay;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txt_TriggerRearm;
+        private System.Windows.Forms.RichTextBox rtb_TriggerCondition;
+        private System.Windows.Forms.RichTextBox rtb_TriggerExecute;
+        private System.Windows.Forms.Label lb_ti_once;
     }
 }
 

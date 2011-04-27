@@ -222,15 +222,6 @@ namespace MBModViewer
             }
         }
 
-
-        /// <summary>Int64.TryParse wrapper with additional attempt at decoding 0x000 hex literals</summary>        
-        private static bool Int64TryParse(String val, out Int64 dest)
-        {//so i'm not copy pasting this everywhere
-            return (Int64.TryParse(val, out dest) ||
-                (val.StartsWith("0x") && Int64.TryParse(val.Substring(2),
-                    System.Globalization.NumberStyles.AllowHexSpecifier, null, out dest)));
-        }
-
         private void tryParse()
         {
             Int64 parsedval;
@@ -354,9 +345,7 @@ namespace MBModViewer
                             this._pythonitems[i].Value = (parsedval | tempval);
                         }
                     }
-
                 }
-
             }
         }
         #endregion
@@ -369,7 +358,7 @@ namespace MBModViewer
             newitems[this._pythonitems.Length] = new PythonDataItem(this._pythonitems.Length);
             newitems[this._pythonitems.Length].Name = pdiname;
             newitems[this._pythonitems.Length].Value = pdivalue;
-            this._pythonitems = newitems;            
+            this._pythonitems = newitems;
         }
     }
 

@@ -21,6 +21,16 @@ namespace MBModViewer
         internal DataReaderSettings _settings;
         #endregion
 
+        /// <summary>Int64.TryParse wrapper with additional attempt at decoding 0x000 hex literals</summary>        
+        internal static bool Int64TryParse(String val, out Int64 dest)
+        {//so i'm not copy pasting this everywhere
+            return (Int64.TryParse(val, out dest) ||
+                (val.StartsWith("0x") && Int64.TryParse(val.Substring(2),
+                    System.Globalization.NumberStyles.AllowHexSpecifier, null, out dest)) ||
+                    (val.IndexOf('.') > 0 && Int64.TryParse(val.Remove(val.IndexOf('.')), out dest))
+                );
+        }
+
         /// <summary>Generic read function.  Contains a while(ReadLine()) loop and close.</summary>
         internal virtual void Read()
         {

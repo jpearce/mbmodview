@@ -19,7 +19,27 @@ namespace MBModViewer
             LoadModVars();
             LoadConstants();
             LoadOps();            
-            LoadScripts();//last
+            LoadScripts();//after vars/constants/ops
+            LoadTriggers();//after scripts (for call_script)
+            lb_ti_once.Text = String.Format("(only once = {0})", StaticDataHolder.Header_Triggers.KeyValue("ti_once").ToString());
+        }
+
+        private void LoadTriggers()
+        {
+            lb_Triggers.Items.Clear();
+            try
+            {
+                Module_OpCode.LoadTriggers();
+                groupBox1.Text = String.Format("Triggers({0})", Module_OpCode.TriggerNames.Length);
+                for (int i = 0; i < Module_OpCode.TriggerNames.Length; ++i)
+                {
+                    lb_Triggers.Items.Add(Module_OpCode.TriggerNames[i]);
+                }
+            }
+            catch (Exception loadex)
+            {
+                MessageBox.Show(loadex.Message, "Trigger loading error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
         }
 
         private void LoadModVars()
@@ -38,12 +58,12 @@ namespace MBModViewer
             lbScripts.Items.Clear();
             try
             {                
-                Module_Script.LoadFromFile();
-                groupBox1.Text = String.Format("Scripts({0})", Module_Script.ScriptNames.Length);
-                SortedList<String, byte> tempsort = new SortedList<string, byte>(Module_Script.ScriptNames.Length);
-                for (int i = 0; i < Module_Script.ScriptNames.Length; ++i)
+                Module_OpCode.LoadScripts();
+                groupBox1.Text = String.Format("Scripts({0})", Module_OpCode.ScriptNames.Length);
+                SortedList<String, byte> tempsort = new SortedList<string, byte>(Module_OpCode.ScriptNames.Length);
+                for (int i = 0; i < Module_OpCode.ScriptNames.Length; ++i)
                 {
-                    tempsort.Add(Module_Script.ScriptNames[i], 0);
+                    tempsort.Add(Module_OpCode.ScriptNames[i], 0);
                 }
                 foreach (KeyValuePair<String, byte> kvp in tempsort) { lbScripts.Items.Add(kvp.Key); }
             }
@@ -62,6 +82,11 @@ namespace MBModViewer
                 {
                     lvConst.Items.Add(pdi.Name).SubItems.AddRange(
                         new String[]{pdi.Value.ToString(), pdi.Source});
+                }
+                foreach (PythonDataItem pdi in StaticDataHolder.Header_Triggers.PythonItems)
+                {
+                    lvConst.Items.Add(pdi.Name).SubItems.AddRange(
+                        new String[] { pdi.Value.ToString(), pdi.Source });
                 }
             }
             catch (Exception loadex)
@@ -90,16 +115,16 @@ namespace MBModViewer
         private void lbScripts_SelectedIndexChanged(object sender, EventArgs e)
         {
             String scriptname = lbScripts.SelectedItem.ToString();
-            for(int i = 0; i < Module_Script.ScriptNames.Length; ++i)
+            for(int i = 0; i < Module_OpCode.ScriptNames.Length; ++i)
             {
-                if(Module_Script.ScriptNames[i] == scriptname)
+                if(Module_OpCode.ScriptNames[i] == scriptname)
                 {
                     groupBox2.Text = String.Format("Script#{1}: {0}", scriptname, i);
                     break;
                 }
             }            
             String[] scriptcontents;
-            Module_Script.SetScriptContents(scriptname, out scriptcontents);
+            Module_OpCode.SetScriptContents(scriptname, out scriptcontents);
             rtbScript.Hide(); 
             rtbScript.Lines = scriptcontents;
         }
@@ -155,14 +180,14 @@ namespace MBModViewer
             }
         }
 
-        private void rtbScript_TextChanged(object sender, EventArgs e)
+        private void codeboxTextChange(object sender, EventArgs e)
         {
-            
-            rtbScript.SuspendLayout();
+            RichTextBox codebox = (RichTextBox)sender;
+            codebox.SuspendLayout();
             int curlen = 0, linelen = 0;
-            for (int i = 0; i < rtbScript.Lines.Length; ++i)
+            for (int i = 0; i < codebox.Lines.Length; ++i)
             {               
-                string[] split = rtbScript.Lines[i].Split(' ');
+                string[] split = codebox.Lines[i].Split(' ');
                 linelen = 0;
                 bool commanddone = false;
                 for (int j = 0; j < split.Length; ++j)
@@ -170,45 +195,65 @@ namespace MBModViewer
                     ++linelen;
                     if (!commanddone && split[j].Length > 1)
                     {
-                        rtbhighlight(curlen + linelen, (split[j].Length - 1), Color.Blue, (split[j].Contains("try_") || split[j].Contains("_try")));
+                        rtbhighlight(codebox, curlen + linelen, (split[j].Length - 1), Color.Blue, (split[j].Contains("try_") || split[j].Contains("_try")));
                         commanddone = true;
                     }                    
                     else if (split[j].StartsWith("\"$"))
                     {
-                        rtbhighlight((curlen - 1) + linelen, (split[j].Length + 1), Color.DarkGreen, true);
+                        rtbhighlight(codebox, (curlen - 1) + linelen, (split[j].Length + 1), Color.DarkGreen, true);
                     }
                     else if (split[j].StartsWith("\":"))
                     {
-                        rtbhighlight((curlen - 1) + linelen, (split[j].Length + 1), Color.DarkGray, true);
+                        rtbhighlight(codebox, (curlen - 1) + linelen, (split[j].Length + 1), Color.DarkGray, true);
                     }
                     linelen += split[j].Length;
                 }
-                curlen += (rtbScript.Lines[i].Length + 1);
-            }            
-            
-            rtbScript.SelectionStart = 0;
-            rtbScript.SelectionLength = rtbScript.Text.Length;
-            rtbScript.DeselectAll();
-            rtbScript.ScrollToCaret();
-            rtbScript.Refresh();
-            rtbScript.Show();
-            rtbScript.ResumeLayout();
+                curlen += (codebox.Lines[i].Length + 1);
+            }  
+            //revert to top
+            codebox.SelectionStart = 0;
+            codebox.SelectionLength = codebox.Text.Length;
+            codebox.DeselectAll();
+            codebox.ScrollToCaret();
+            codebox.Refresh();
+            codebox.Show();
+            codebox.ResumeLayout();
         }
 
-        private void rtbhighlight(Int32 start, Int32 len, Color newcolor, bool Bold)
+        private void rtbhighlight(RichTextBox targetbox, Int32 start, Int32 len, Color newcolor, bool Bold)
         {
-            rtbScript.Select(start, len);
-            rtbScript.SelectionColor = newcolor;
+            targetbox.Select(start, len);
+            targetbox.SelectionColor = newcolor;
             if (Bold)
             {
-                rtbScript.SelectionFont = new Font(
-                   rtbScript.SelectionFont.FontFamily,
-                   rtbScript.SelectionFont.Size,
+                targetbox.SelectionFont = new Font(
+                   targetbox.SelectionFont.FontFamily,
+                   targetbox.SelectionFont.Size,
                    FontStyle.Bold
                 );
             }
-
-            rtbScript.DeselectAll();
+            targetbox.DeselectAll();
         }
+
+        private void lb_Triggers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txt_TriggerCheck.Text = Module_OpCode.TriggerCheck(lb_Triggers.SelectedItem.ToString());
+            txt_TriggerDelay.Text = Module_OpCode.TriggerDelay(lb_Triggers.SelectedItem.ToString());
+            txt_TriggerRearm.Text = Module_OpCode.TriggerRearm(lb_Triggers.SelectedItem.ToString());
+            String[] conditions;
+            Module_OpCode.SetTriggerConditions(lb_Triggers.SelectedItem.ToString(), out conditions);
+            rtb_TriggerCondition.Hide();
+            rtb_TriggerCondition.Lines = conditions;
+            String[] execute;
+            Module_OpCode.SetTriggerContents(lb_Triggers.SelectedItem.ToString(), out execute);
+            rtb_TriggerExecute.Hide();
+            rtb_TriggerExecute.Lines = execute;
+        }
+
+        
+
+        
+
+        
     }
 }
