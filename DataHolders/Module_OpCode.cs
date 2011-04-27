@@ -9,11 +9,12 @@ namespace MBModViewer
     internal static class Module_OpCode
     {
         internal static Boolean compat808 = false;
-        internal static String[] ScriptNames;//gui access
-        internal static String[] TriggerNames;//gui access
-
+        internal static String[] ScriptNames;//gui access      
+        internal static Int32 TriggerCount { get { return triggerreader.Items.Length; } }
+        internal static Int32 SimpleTriggerCount { get { return simpletriggerreader.Items.Length; } }
         private static ScriptDataReader scriptreader;
         private static TriggerDataReader triggerreader;
+        private static TriggerDataReader simpletriggerreader;
         private static Int64 minvaluebitshift;
         private static Int32 bitshifts;
         private static Dictionary<Int64, String> varmasks;
@@ -111,6 +112,14 @@ namespace MBModViewer
             
             triggerreader = new TriggerDataReader(Config.GetSetting("filelocation_txtdir") + "triggers.txt");
             triggerreader.Read();            
+        }
+
+        internal static void LoadSimpleTriggers()
+        {//todo: want to check if we have any loaded & changed etc 
+
+            simpletriggerreader = new TriggerDataReader(Config.GetSetting("filelocation_txtdir") + "simple_triggers.txt");
+            simpletriggerreader.SimpleTriggers = true;
+            simpletriggerreader.Read();
         }
 
         /// <summary>Set indentlist, unindentlist, reindentlist </summary>
@@ -404,68 +413,64 @@ namespace MBModViewer
         }
 
         #region trigger-specific
-        internal static String TriggerCheck(String triggerName)
-        {            
-            for (int i = 0; i < triggerreader.Items.Length; ++i)
+        private static TriggerDataItem targetByName(String triggerName)
+        {
+            String target = triggerName.Replace("Trigger", String.Empty);
+            if (target.Contains("Simple"))
             {
-                if (triggerreader.TriggerItems[i].Name == triggerName) { return triggerreader.TriggerItems[i].Check.ToString(); }
+                target = target.Replace("Simple", String.Empty);
+                return simpletriggerreader.TriggerItems[Int32.Parse(target)];
             }
-            return String.Empty;
+            return triggerreader.TriggerItems[Int32.Parse(target)];
+        }
+
+        internal static String TriggerCheck(String triggerName)
+        {   
+            return targetByName(triggerName).Check.ToString();
         }
 
         internal static String TriggerDelay(String triggerName)
         {
-            for (int i = 0; i < triggerreader.Items.Length; ++i)
-            {
-                if (triggerreader.TriggerItems[i].Name == triggerName) { return triggerreader.TriggerItems[i].Delay.ToString(); }
-            }
-            return String.Empty;
+            if (triggerName.StartsWith("Simple")) { return String.Empty; }
+            return targetByName(triggerName).Delay.ToString(); 
         }
 
         internal static String TriggerRearm(String triggerName)
         {
-            for (int i = 0; i < triggerreader.Items.Length; ++i)
-            {
-                if (triggerreader.TriggerItems[i].Name == triggerName) { return triggerreader.TriggerItems[i].Rearm.ToString(); }
-            }
-            return String.Empty;
+            if (triggerName.StartsWith("Simple")) { return String.Empty; }
+            return targetByName(triggerName).Rearm.ToString(); 
         }
 
-        internal static void SetTriggerConditions(String scriptname, out String[] outlines)
+        internal static void SetTriggerConditions(String triggerName, out String[] outlines)
         {
-            List<string> translatedStatements = new List<string>(64);
-            for (int i = 0; i < TriggerNames.Length; ++i)
+            if (triggerName.StartsWith("Simple")) 
             {
-                if (TriggerNames[i] == scriptname)
-                {
-                    TriggerDataItem s = triggerreader.TriggerItems[i];
-                    int indents = 0;
-                    int index = 1;
-                    while (index < s.Condition.Length)
-                    {
-                        translatedStatements.Add(translateLine(s.Condition, ref index, ref indents));
-                    }
-                }
+                outlines = new String[0];
             }
-            outlines = translatedStatements.ToArray();
+            else
+            {
+                List<string> translatedStatements = new List<string>(64);
+                TriggerDataItem s = targetByName(triggerName);
+                int indents = 0;
+                int index = 1;
+                while (index < s.Condition.Length)
+                {
+                    translatedStatements.Add(translateLine(s.Condition, ref index, ref indents));
+                }
+                outlines = translatedStatements.ToArray();
+            }
         }
 
-        internal static void SetTriggerContents(String scriptname, out String[] outlines)
+        internal static void SetTriggerContents(String triggerName, out String[] outlines)
         {
-            List<string> translatedStatements = new List<string>(64);
-            for (int i = 0; i < TriggerNames.Length; ++i)
+            TriggerDataItem s = targetByName(triggerName);
+            List<string> translatedStatements = new List<string>(64);            
+            int indents = 0;
+            int index = 1;
+            while (index < s.Content.Length)
             {
-                if (TriggerNames[i] == scriptname)
-                {
-                    TriggerDataItem s = triggerreader.TriggerItems[i];
-                    int indents = 0;
-                    int index = 1;
-                    while (index < s.Content.Length)
-                    {
-                        translatedStatements.Add(translateLine(s.Content, ref index, ref indents));
-                    }
-                }
-            }
+                translatedStatements.Add(translateLine(s.Content, ref index, ref indents));
+            }            
             outlines = translatedStatements.ToArray();
         }
         #endregion
