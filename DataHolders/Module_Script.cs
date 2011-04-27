@@ -8,6 +8,7 @@ namespace MBModViewer
 {
     internal static class Module_Script
     {
+        internal static Boolean compat808 = false;
         internal static FileInfo filelocation;
         private static Script[] scripts;
         internal static String[] ScriptNames;
@@ -22,7 +23,8 @@ namespace MBModViewer
         /// <summary>Static initializer</summary>
         static Module_Script()
         {
-            filelocation = new FileInfo(Config.GetSetting("filelocation_txtdir") + "scripts.txt");
+            filelocation = new FileInfo(Config.GetSetting("filelocation_txtdir") + "scripts.txt");            
+            if(Config.GetSetting("compat808") != null && Config.GetSetting("compat808") == "true") { compat808 = true; }
             setvarmasks();
         }
 
@@ -41,20 +43,22 @@ namespace MBModViewer
                         {
                             switch (pdi.Name)
                             {
+                                //these will overlap, opmask_variable is the same value as tag_variable
+                                //thus the try/catch
                                 case "opmask_local_variable":
-                                    varmasks.Add(pdi.Value, "[localvar]");
+                                    varmasks.Add(pdi.Value, "[local_variable]");
                                     break;
                                 case "opmask_variable":
-                                    varmasks.Add(pdi.Value, "$globalvar");
+                                    varmasks.Add(pdi.Value, "[variable]");
                                     break;
                                 case "opmask_register":
                                     varmasks.Add(pdi.Value, "#register");
                                     break;
                                 case "opmask_quest_index":
-                                    varmasks.Add(pdi.Value, "@questvar");
+                                    varmasks.Add(pdi.Value, "[quest]");
                                     break;
                                 case "opmask_quick_string":
-                                    varmasks.Add(pdi.Value, "!qstring");
+                                    varmasks.Add(pdi.Value, "[quick_string]");
                                     break;
                                 default:
                                     if (!pdi.Name.StartsWith("reg"))
@@ -258,7 +262,21 @@ namespace MBModViewer
                         break;
                 }
                 workstr = "(" + workstr;
-                if (contents[index] > 0)
+                if (compat808)
+                {//either a 0 or nonzero and 2 following args
+                    workstr += ", ";
+                    if (contents[index] > 0)
+                    {//if == 0 then we're on the last arg already which is where we want to end up                    
+                        for (int i = 0; i < 3; ++i)
+                        {
+                            workstr += prettyVar(contents[index + i]);
+                            if (i < 2) { workstr += ", "; }
+                        }
+                        --index;
+                    }       
+                    
+                }
+                else if (contents[index] > 0)
                 {
                     workstr += ", ";
                     int statementend = (Int32)contents[index] + (index + 1);
