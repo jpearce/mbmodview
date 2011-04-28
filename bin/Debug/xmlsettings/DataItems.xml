@@ -7,6 +7,7 @@
         <item id="name" type="string"/>
         <item type="space"/>
         <item id="prettyname" type="string"/>
+        <item type="space"/>
       </line>
       <line/>
     </Processing>

@@ -6,13 +6,13 @@ namespace MBModViewer
     internal class DataItemSettings
     {
         internal String Name;
-        internal List<String> LineItemIDs;
+        internal List<String> LineItemLabels;
         internal List<LineItemTypes> LineItemTypes;
 
         internal DataItemSettings(String name)
         {
             this.Name = name;
-            this.LineItemIDs = new List<String>();
+            this.LineItemLabels = new List<String>();
             this.LineItemTypes = new List<LineItemTypes>();
         }
     }

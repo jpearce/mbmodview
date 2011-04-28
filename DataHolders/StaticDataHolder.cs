@@ -197,7 +197,7 @@ namespace MBModViewer
                                                 if (xr.NodeType == XmlNodeType.EndElement || xr.IsEmptyElement)
                                                 {//add a lineend type for <line/> or </line>                                                    
                                                     dis.LineItemTypes.Add(LineItemTypes.LineEnd);
-                                                    dis.LineItemIDs.Add(null);
+                                                    dis.LineItemLabels.Add(null);
                                                 }
                                             }
                                             else if (xr.Name == "item")
@@ -209,21 +209,21 @@ namespace MBModViewer
                                                     {
                                                         case "space":
                                                             dis.LineItemTypes.Add(LineItemTypes.Space);
-                                                            dis.LineItemIDs.Add(null);
+                                                            dis.LineItemLabels.Add(null);
                                                             break;
                                                         case "string":
                                                             dis.LineItemTypes.Add(LineItemTypes.String);
                                                             type = xr.GetAttribute("id");
                                                             if(type == null)
                                                                 throw new FormatException("ID missing in data item in DataItems->Line->Type");
-                                                            dis.LineItemIDs.Add(type);
+                                                            dis.LineItemLabels.Add(type);
                                                             break;
                                                         case "number":
                                                             dis.LineItemTypes.Add(LineItemTypes.Int64);
                                                             type = xr.GetAttribute("id");
                                                             if (type == null)
                                                                 throw new FormatException("ID missing in data item in DataItems->Line->Type");
-                                                            dis.LineItemIDs.Add(type);
+                                                            dis.LineItemLabels.Add(type);
                                                             break;
                                                         default:
                                                             throw new FormatException("Unknown type encountered in DataItems->Line->Type");                                                            

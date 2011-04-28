@@ -19,6 +19,7 @@ namespace MBModViewer
         #region fields
         protected DataItem[] _items;
         internal DataReaderSettings _settings;
+        
         #endregion
 
         /// <summary>Int64.TryParse wrapper with additional attempt at decoding 0x000 hex literals</summary>        
@@ -95,6 +96,7 @@ namespace MBModViewer
             {
                 newitem.Source += linestr + "\n";
                 List<Int64> tempcontents = new List<Int64>(64);
+                List<String> tempstrings = new List<String>(4); //unlikely to use this
                 for (int i = 0; i < this._settings.DataType.LineItemTypes.Count; ++i)
                 {
                     switch (this._settings.DataType.LineItemTypes[i])
@@ -115,7 +117,7 @@ namespace MBModViewer
                             tempcontents.Add(newint);
                             break;
                         case LineItemTypes.String:
-                            if (this._settings.DataType.LineItemIDs[i] == "name")
+                            if (this._settings.DataType.LineItemLabels[i] == "name")
                             {
                                 if (this._settings.DataType.LineItemTypes.Count > (i + 1))
                                 {
@@ -126,6 +128,20 @@ namespace MBModViewer
                                     else if (this._settings.DataType.LineItemTypes[i + 1] == LineItemTypes.Space)
                                     {
                                         newitem.Name = linestr.Remove(linestr.IndexOf(' ')).Trim();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (this._settings.DataType.LineItemTypes.Count > (i + 1))
+                                {
+                                    if (this._settings.DataType.LineItemTypes[i + 1] == LineItemTypes.LineEnd)
+                                    {
+                                        tempstrings.Add(linestr.Trim());
+                                    }
+                                    else if (this._settings.DataType.LineItemTypes[i + 1] == LineItemTypes.Space)
+                                    {
+                                        tempstrings.Add(linestr.Remove(linestr.IndexOf(' ')).Trim());
                                     }
                                 }
                             }
@@ -140,6 +156,7 @@ namespace MBModViewer
                     }
                 }
                 newitem.Content = tempcontents.ToArray();
+                newitem.Strings = tempstrings.ToArray();
                 if (this.ItemType == "globalvar") { newitem.Name = newitem.Source.Trim(); } //they don't get a name
                 return newitem;
             }
@@ -162,9 +179,25 @@ namespace MBModViewer
         {
             for (int i = 1; i < this._settings.StartLine; ++i) { reader.ReadLine(); }
             return true;
+        }        
+
+        internal String[] ListLabels()
+        {
+            List<String> templist = new List<string>(this._settings.DataType.LineItemLabels.Count);
+            for (int i = 0; i < this._settings.DataType.LineItemLabels.Count; ++i)
+            {
+                if (this._settings.DataType.LineItemLabels[i] != null && this._settings.DataType.LineItemLabels[i] != "name")
+                {
+                    templist.Add(this._settings.DataType.LineItemLabels[i]);
+                }
+            }
+            return templist.ToArray();
         }
 
-
+        internal String[] ListContents(Int32 index)
+        {
+            return this._items[index].ListContents(this._settings.DataType);
+        }
 
     }
 }

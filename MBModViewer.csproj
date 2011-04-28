@@ -43,6 +43,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="Forms\ConstantForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConstantForm.Designer.cs">
+      <DependentUpon>ConstantForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\VariableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VariableForm.Designer.cs">
+      <DependentUpon>VariableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionForm.Designer.cs">
+      <DependentUpon>OptionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Readers\ScriptDataReader.cs" />
     <Compile Include="Readers\DataItemSettings.cs" />
     <Compile Include="Readers\DataReaderSettings.cs" />
@@ -64,6 +82,9 @@
     <Compile Include="DataHolders\Module_OpCode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\ConstantForm.resx">
+      <DependentUpon>ConstantForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -10,12 +10,10 @@ namespace MBModViewer
     {
         public ScriptForm()
         {
+            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();            
             StaticDataHolder.LoadAll();            
-            //MessageBox.Show("Error loading xml configurations:\n" + ex.Message);
-            LoadModVars();
-            LoadConstants();
-            LoadOps();            
+            //MessageBox.Show("Error loading xml configurations:\n" + ex.Message);                  
             LoadScripts();//after vars/constants/ops
             LoadTriggers();//after scripts (for call_script)
             lb_ti_once.Text = String.Format("(only once = {0})", StaticDataHolder.Header_Triggers.KeyValue("ti_once").ToString());
@@ -44,16 +42,7 @@ namespace MBModViewer
             }            
         }
 
-        private void LoadModVars()
-        {
-            lb_mvtypes.Items.Clear();
-            SortedList<String, byte> tempsort = new SortedList<string, byte>();
-            for (int i = 0; i < StaticDataHolder.DataReaders.Length; i++)
-            {
-                tempsort.Add(StaticDataHolder.DataReaders[i].Name, 0);
-            }
-            foreach (KeyValuePair<String, byte> kvp in tempsort) { lb_mvtypes.Items.Add(kvp.Key); }
-        }
+
 
         private void LoadScripts()
         {
@@ -73,46 +62,7 @@ namespace MBModViewer
             {
                 MessageBox.Show(loadex.Message, "Script loading error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void LoadConstants()
-        {
-            lvConst.Items.Clear();
-            try
-            {                
-                foreach (PythonDataItem pdi in StaticDataHolder.Header_Common.PythonItems)
-                {
-                    lvConst.Items.Add(pdi.Name).SubItems.AddRange(
-                        new String[]{pdi.Value.ToString(), pdi.Source});
-                }
-                foreach (PythonDataItem pdi in StaticDataHolder.Header_Triggers.PythonItems)
-                {
-                    lvConst.Items.Add(pdi.Name).SubItems.AddRange(
-                        new String[] { pdi.Value.ToString(), pdi.Source });
-                }
-            }
-            catch (Exception loadex)
-            {
-                MessageBox.Show(loadex.Message, "Constants loading error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void LoadOps()
-        {
-            lv_Ops.Items.Clear();
-            try
-            {
-                foreach (PythonDataItem pdi in StaticDataHolder.Header_Operations.PythonItems)
-                {
-                    lv_Ops.Items.Add(pdi.Name).SubItems.AddRange(
-                        new String[] { pdi.Source, pdi.Value.ToString() });
-                }                
-            }
-            catch (Exception loadex)
-            {
-                MessageBox.Show(loadex.Message, "Constants loading error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        }        
 
         private void lbScripts_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -131,56 +81,6 @@ namespace MBModViewer
             rtbScript.Lines = scriptcontents;
         }
 
-        private void lb_mvtypes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            String t = lb_mvtypes.SelectedItem.ToString();
-            for (int i = 0; i < StaticDataHolder.DataReaders.Length; ++i)
-            {
-                if (StaticDataHolder.DataReaders[i].Name == t)
-                {
-                    lb_mvnames.Items.Clear();
-                    SortedList<String, byte> tempsort = new SortedList<string, byte>();
-                    for (int j = 0; j < StaticDataHolder.DataReaders[i].Items.Length; ++j)
-                    {
-                        if (tempsort.ContainsKey(StaticDataHolder.DataReaders[i].Items[j].Name))
-                        {
-                            for (int k = 0; k < 100; ++k)
-                            {
-                                if (!tempsort.ContainsKey(StaticDataHolder.DataReaders[i].Items[j].Name + "(" + k.ToString() + ")"))
-                                {
-                                    tempsort.Add(StaticDataHolder.DataReaders[i].Items[j].Name + "(" + k.ToString() + ")", 0);
-                                    k = 100;
-                                }
-                            }
-                        }
-                        else { tempsort.Add(StaticDataHolder.DataReaders[i].Items[j].Name, 0); }
-                    }
-                    foreach (KeyValuePair<String, byte> kvp in tempsort) { lb_mvnames.Items.Add(kvp.Key); }
-                }
-            }
-        }
-
-        private void lb_mvnames_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            String t = lb_mvtypes.SelectedItem.ToString();
-            for (int i = 0; i < StaticDataHolder.DataReaders.Length; ++i)
-            {
-                if (StaticDataHolder.DataReaders[i].Name == t)
-                {
-                    String v = lb_mvnames.SelectedItem.ToString();
-                    
-                    for (int j = 0; j < StaticDataHolder.DataReaders[i].Items.Length; ++j)
-                    {
-                        if (StaticDataHolder.DataReaders[i].Items[j].Name == v)
-                        {
-                            lv_mvvals.Items.Clear();
-                            lv_mvvals.Items.Add("ID").SubItems.Add(StaticDataHolder.DataReaders[i].Items[j].ID.ToString());
-                            lv_mvvals.Items.Add("Name").SubItems.Add(StaticDataHolder.DataReaders[i].Items[j].Name);
-                        }                        
-                    }                    
-                }
-            }
-        }
 
         private void codeboxTextChange(object sender, EventArgs e)
         {
@@ -270,5 +170,40 @@ namespace MBModViewer
             rtb_TriggerExecute.Hide();
             rtb_TriggerExecute.Lines = execute;
         }
+
+        private static OptionForm options = null;
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (options == null || options.IsDisposed) 
+            { 
+                options = new OptionForm();
+                options.Show();
+            }
+            options.BringToFront();
+        }
+
+        private static VariableForm variables = null;
+        private void variablesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (variables == null || variables.IsDisposed)
+            {
+                variables = new VariableForm();
+                variables.Show();
+            }
+            variables.BringToFront();
+        }
+
+        private static ConstantForm constants = null;
+        private void constantsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants == null || constants.IsDisposed)
+            {
+                constants = new ConstantForm();
+                constants.Show();
+            }
+            constants.BringToFront();
+        }
+
+        
     }
 }

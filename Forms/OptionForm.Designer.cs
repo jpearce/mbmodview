@@ -1,6 +1,6 @@
 ﻿namespace MBModViewer
 {
-    partial class ScriptForm
+    partial class OptionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,40 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.menu_0tool = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.variablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.constantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tab_Scripts = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbScripts = new System.Windows.Forms.ListBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rtbScript = new System.Windows.Forms.RichTextBox();
-            this.tab_Triggers = new System.Windows.Forms.TabPage();
-            this.splitContainer8 = new System.Windows.Forms.SplitContainer();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.lb_Triggers = new System.Windows.Forms.ListBox();
-            this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.splitContainer9 = new System.Windows.Forms.SplitContainer();
-            this.groupBox15 = new System.Windows.Forms.GroupBox();
-            this.lb_ti_once = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txt_TriggerRearm = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txt_TriggerDelay = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txt_TriggerCheck = new System.Windows.Forms.TextBox();
-            this.splitContainer10 = new System.Windows.Forms.SplitContainer();
-            this.groupBox16 = new System.Windows.Forms.GroupBox();
-            this.rtb_TriggerCondition = new System.Windows.Forms.RichTextBox();
-            this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.rtb_TriggerExecute = new System.Windows.Forms.RichTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -110,29 +76,8 @@
             this.listView5 = new System.Windows.Forms.ListView();
             this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
-            this.menuStrip1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tab_Scripts.SuspendLayout();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.tab_Triggers.SuspendLayout();
-            this.splitContainer8.Panel1.SuspendLayout();
-            this.splitContainer8.Panel2.SuspendLayout();
-            this.splitContainer8.SuspendLayout();
-            this.groupBox13.SuspendLayout();
-            this.groupBox14.SuspendLayout();
-            this.splitContainer9.Panel1.SuspendLayout();
-            this.splitContainer9.Panel2.SuspendLayout();
-            this.splitContainer9.SuspendLayout();
-            this.groupBox15.SuspendLayout();
-            this.splitContainer10.Panel1.SuspendLayout();
-            this.splitContainer10.Panel2.SuspendLayout();
-            this.splitContainer10.SuspendLayout();
-            this.groupBox16.SuspendLayout();
-            this.groupBox17.SuspendLayout();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lb_OptionsMain = new System.Windows.Forms.ListBox();
             this.tabPage1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -162,424 +107,9 @@
             this.groupBox10.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage9.SuspendLayout();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menu_0tool,
-            this.editToolStripMenuItem,
-            this.vToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1177, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // menu_0tool
-            // 
-            this.menu_0tool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem});
-            this.menu_0tool.Name = "menu_0tool";
-            this.menu_0tool.Size = new System.Drawing.Size(37, 20);
-            this.menu_0tool.Text = "&File";
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.newToolStripMenuItem.Text = "New";
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "&Edit";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.optionsToolStripMenuItem.Text = "Options";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
-            // 
-            // vToolStripMenuItem
-            // 
-            this.vToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.variablesToolStripMenuItem,
-            this.constantsToolStripMenuItem});
-            this.vToolStripMenuItem.Name = "vToolStripMenuItem";
-            this.vToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.vToolStripMenuItem.Text = "&View";
-            // 
-            // variablesToolStripMenuItem
-            // 
-            this.variablesToolStripMenuItem.Name = "variablesToolStripMenuItem";
-            this.variablesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.variablesToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.variablesToolStripMenuItem.Text = "&Variables";
-            this.variablesToolStripMenuItem.Click += new System.EventHandler(this.variablesToolStripMenuItem_Click);
-            // 
-            // constantsToolStripMenuItem
-            // 
-            this.constantsToolStripMenuItem.Name = "constantsToolStripMenuItem";
-            this.constantsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.constantsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.constantsToolStripMenuItem.Text = "&Constants";
-            this.constantsToolStripMenuItem.Click += new System.EventHandler(this.constantsToolStripMenuItem_Click);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tab_Scripts);
-            this.tabControl1.Controls.Add(this.tab_Triggers);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 24);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1177, 593);
-            this.tabControl1.TabIndex = 1;
-            // 
-            // tab_Scripts
-            // 
-            this.tab_Scripts.Controls.Add(this.splitContainer1);
-            this.tab_Scripts.Location = new System.Drawing.Point(4, 25);
-            this.tab_Scripts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tab_Scripts.Name = "tab_Scripts";
-            this.tab_Scripts.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tab_Scripts.Size = new System.Drawing.Size(1169, 564);
-            this.tab_Scripts.TabIndex = 0;
-            this.tab_Scripts.Text = "Scripts";
-            this.tab_Scripts.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 4);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(1163, 556);
-            this.splitContainer1.SplitterDistance = 295;
-            this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 2;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lbScripts);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(295, 556);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Scripts";
-            // 
-            // lbScripts
-            // 
-            this.lbScripts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbScripts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbScripts.FormattingEnabled = true;
-            this.lbScripts.ItemHeight = 16;
-            this.lbScripts.Location = new System.Drawing.Point(3, 20);
-            this.lbScripts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.lbScripts.Name = "lbScripts";
-            this.lbScripts.Size = new System.Drawing.Size(289, 532);
-            this.lbScripts.TabIndex = 0;
-            this.lbScripts.SelectedIndexChanged += new System.EventHandler(this.lbScripts_SelectedIndexChanged);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.rtbScript);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(863, 556);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Script Text";
-            // 
-            // rtbScript
-            // 
-            this.rtbScript.AcceptsTab = true;
-            this.rtbScript.BackColor = System.Drawing.SystemColors.Window;
-            this.rtbScript.DetectUrls = false;
-            this.rtbScript.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbScript.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbScript.HideSelection = false;
-            this.rtbScript.Location = new System.Drawing.Point(3, 20);
-            this.rtbScript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.rtbScript.Name = "rtbScript";
-            this.rtbScript.ReadOnly = true;
-            this.rtbScript.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtbScript.Size = new System.Drawing.Size(857, 532);
-            this.rtbScript.TabIndex = 0;
-            this.rtbScript.Text = "";
-            this.rtbScript.WordWrap = false;
-            this.rtbScript.TextChanged += new System.EventHandler(this.codeboxTextChange);
-            // 
-            // tab_Triggers
-            // 
-            this.tab_Triggers.Controls.Add(this.splitContainer8);
-            this.tab_Triggers.Location = new System.Drawing.Point(4, 25);
-            this.tab_Triggers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tab_Triggers.Name = "tab_Triggers";
-            this.tab_Triggers.Size = new System.Drawing.Size(1169, 564);
-            this.tab_Triggers.TabIndex = 4;
-            this.tab_Triggers.Text = "Triggers";
-            this.tab_Triggers.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer8
-            // 
-            this.splitContainer8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer8.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.splitContainer8.Name = "splitContainer8";
-            // 
-            // splitContainer8.Panel1
-            // 
-            this.splitContainer8.Panel1.Controls.Add(this.groupBox13);
-            // 
-            // splitContainer8.Panel2
-            // 
-            this.splitContainer8.Panel2.Controls.Add(this.groupBox14);
-            this.splitContainer8.Size = new System.Drawing.Size(1169, 564);
-            this.splitContainer8.SplitterDistance = 196;
-            this.splitContainer8.SplitterWidth = 5;
-            this.splitContainer8.TabIndex = 3;
-            // 
-            // groupBox13
-            // 
-            this.groupBox13.Controls.Add(this.lb_Triggers);
-            this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox13.Location = new System.Drawing.Point(0, 0);
-            this.groupBox13.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox13.Size = new System.Drawing.Size(196, 564);
-            this.groupBox13.TabIndex = 0;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Triggers";
-            // 
-            // lb_Triggers
-            // 
-            this.lb_Triggers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lb_Triggers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Triggers.FormattingEnabled = true;
-            this.lb_Triggers.ItemHeight = 16;
-            this.lb_Triggers.Location = new System.Drawing.Point(3, 20);
-            this.lb_Triggers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.lb_Triggers.Name = "lb_Triggers";
-            this.lb_Triggers.Size = new System.Drawing.Size(190, 532);
-            this.lb_Triggers.TabIndex = 0;
-            this.lb_Triggers.SelectedIndexChanged += new System.EventHandler(this.lb_Triggers_SelectedIndexChanged);
-            // 
-            // groupBox14
-            // 
-            this.groupBox14.Controls.Add(this.splitContainer9);
-            this.groupBox14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox14.Location = new System.Drawing.Point(0, 0);
-            this.groupBox14.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox14.Size = new System.Drawing.Size(968, 564);
-            this.groupBox14.TabIndex = 0;
-            this.groupBox14.TabStop = false;
-            // 
-            // splitContainer9
-            // 
-            this.splitContainer9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer9.Location = new System.Drawing.Point(3, 20);
-            this.splitContainer9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.splitContainer9.Name = "splitContainer9";
-            this.splitContainer9.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer9.Panel1
-            // 
-            this.splitContainer9.Panel1.Controls.Add(this.groupBox15);
-            // 
-            // splitContainer9.Panel2
-            // 
-            this.splitContainer9.Panel2.Controls.Add(this.splitContainer10);
-            this.splitContainer9.Size = new System.Drawing.Size(962, 540);
-            this.splitContainer9.SplitterDistance = 93;
-            this.splitContainer9.SplitterWidth = 5;
-            this.splitContainer9.TabIndex = 0;
-            // 
-            // groupBox15
-            // 
-            this.groupBox15.Controls.Add(this.lb_ti_once);
-            this.groupBox15.Controls.Add(this.label3);
-            this.groupBox15.Controls.Add(this.txt_TriggerRearm);
-            this.groupBox15.Controls.Add(this.label2);
-            this.groupBox15.Controls.Add(this.txt_TriggerDelay);
-            this.groupBox15.Controls.Add(this.label1);
-            this.groupBox15.Controls.Add(this.txt_TriggerCheck);
-            this.groupBox15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox15.Location = new System.Drawing.Point(0, 0);
-            this.groupBox15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox15.Size = new System.Drawing.Size(962, 93);
-            this.groupBox15.TabIndex = 0;
-            this.groupBox15.TabStop = false;
-            this.groupBox15.Text = "Attributes";
-            // 
-            // lb_ti_once
-            // 
-            this.lb_ti_once.AutoSize = true;
-            this.lb_ti_once.Location = new System.Drawing.Point(563, 36);
-            this.lb_ti_once.Name = "lb_ti_once";
-            this.lb_ti_once.Size = new System.Drawing.Size(0, 16);
-            this.lb_ti_once.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(395, 37);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 16);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "RearmDelay";
-            // 
-            // txt_TriggerRearm
-            // 
-            this.txt_TriggerRearm.Location = new System.Drawing.Point(477, 33);
-            this.txt_TriggerRearm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txt_TriggerRearm.Name = "txt_TriggerRearm";
-            this.txt_TriggerRearm.Size = new System.Drawing.Size(79, 23);
-            this.txt_TriggerRearm.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(203, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "ExecuteDelay";
-            // 
-            // txt_TriggerDelay
-            // 
-            this.txt_TriggerDelay.Location = new System.Drawing.Point(295, 36);
-            this.txt_TriggerDelay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txt_TriggerDelay.Name = "txt_TriggerDelay";
-            this.txt_TriggerDelay.Size = new System.Drawing.Size(79, 23);
-            this.txt_TriggerDelay.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "CheckInterval";
-            // 
-            // txt_TriggerCheck
-            // 
-            this.txt_TriggerCheck.Location = new System.Drawing.Point(100, 36);
-            this.txt_TriggerCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txt_TriggerCheck.Name = "txt_TriggerCheck";
-            this.txt_TriggerCheck.Size = new System.Drawing.Size(79, 23);
-            this.txt_TriggerCheck.TabIndex = 0;
-            // 
-            // splitContainer10
-            // 
-            this.splitContainer10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer10.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer10.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.splitContainer10.Name = "splitContainer10";
-            // 
-            // splitContainer10.Panel1
-            // 
-            this.splitContainer10.Panel1.Controls.Add(this.groupBox16);
-            // 
-            // splitContainer10.Panel2
-            // 
-            this.splitContainer10.Panel2.Controls.Add(this.groupBox17);
-            this.splitContainer10.Size = new System.Drawing.Size(962, 442);
-            this.splitContainer10.SplitterDistance = 451;
-            this.splitContainer10.SplitterWidth = 5;
-            this.splitContainer10.TabIndex = 0;
-            // 
-            // groupBox16
-            // 
-            this.groupBox16.Controls.Add(this.rtb_TriggerCondition);
-            this.groupBox16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox16.Location = new System.Drawing.Point(0, 0);
-            this.groupBox16.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox16.Size = new System.Drawing.Size(451, 442);
-            this.groupBox16.TabIndex = 1;
-            this.groupBox16.TabStop = false;
-            this.groupBox16.Text = "Condition";
-            // 
-            // rtb_TriggerCondition
-            // 
-            this.rtb_TriggerCondition.AcceptsTab = true;
-            this.rtb_TriggerCondition.BackColor = System.Drawing.SystemColors.Window;
-            this.rtb_TriggerCondition.DetectUrls = false;
-            this.rtb_TriggerCondition.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_TriggerCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb_TriggerCondition.HideSelection = false;
-            this.rtb_TriggerCondition.Location = new System.Drawing.Point(3, 20);
-            this.rtb_TriggerCondition.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.rtb_TriggerCondition.Name = "rtb_TriggerCondition";
-            this.rtb_TriggerCondition.ReadOnly = true;
-            this.rtb_TriggerCondition.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtb_TriggerCondition.Size = new System.Drawing.Size(445, 418);
-            this.rtb_TriggerCondition.TabIndex = 1;
-            this.rtb_TriggerCondition.Text = "";
-            this.rtb_TriggerCondition.WordWrap = false;
-            this.rtb_TriggerCondition.TextChanged += new System.EventHandler(this.codeboxTextChange);
-            // 
-            // groupBox17
-            // 
-            this.groupBox17.Controls.Add(this.rtb_TriggerExecute);
-            this.groupBox17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox17.Location = new System.Drawing.Point(0, 0);
-            this.groupBox17.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox17.Size = new System.Drawing.Size(506, 442);
-            this.groupBox17.TabIndex = 1;
-            this.groupBox17.TabStop = false;
-            this.groupBox17.Text = "Execute";
-            // 
-            // rtb_TriggerExecute
-            // 
-            this.rtb_TriggerExecute.AcceptsTab = true;
-            this.rtb_TriggerExecute.BackColor = System.Drawing.SystemColors.Window;
-            this.rtb_TriggerExecute.DetectUrls = false;
-            this.rtb_TriggerExecute.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_TriggerExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb_TriggerExecute.HideSelection = false;
-            this.rtb_TriggerExecute.Location = new System.Drawing.Point(3, 20);
-            this.rtb_TriggerExecute.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.rtb_TriggerExecute.Name = "rtb_TriggerExecute";
-            this.rtb_TriggerExecute.ReadOnly = true;
-            this.rtb_TriggerExecute.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtb_TriggerExecute.Size = new System.Drawing.Size(500, 418);
-            this.rtb_TriggerExecute.TabIndex = 1;
-            this.rtb_TriggerExecute.Text = "";
-            this.rtb_TriggerExecute.WordWrap = false;
-            this.rtb_TriggerExecute.TextChanged += new System.EventHandler(this.codeboxTextChange);
             // 
             // tabPage1
             // 
@@ -1080,44 +610,41 @@
             this.columnHeader14.Text = "Value";
             this.columnHeader14.Width = 174;
             // 
-            // ScriptForm
+            // splitContainer1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1177, 617);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.menuStrip1);
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.lb_OptionsMain);
+            this.splitContainer1.Size = new System.Drawing.Size(672, 383);
+            this.splitContainer1.SplitterDistance = 141;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // lb_OptionsMain
+            // 
+            this.lb_OptionsMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lb_OptionsMain.FormattingEnabled = true;
+            this.lb_OptionsMain.ItemHeight = 16;
+            this.lb_OptionsMain.Location = new System.Drawing.Point(0, 0);
+            this.lb_OptionsMain.Name = "lb_OptionsMain";
+            this.lb_OptionsMain.Size = new System.Drawing.Size(141, 372);
+            this.lb_OptionsMain.TabIndex = 0;
+            // 
+            // OptionForm
+            // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(672, 383);
+            this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ScriptForm";
+            this.MaximizeBox = false;
+            this.Name = "OptionForm";
             this.ShowIcon = false;
-            this.Text = "MBModViewer";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tab_Scripts.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.tab_Triggers.ResumeLayout(false);
-            this.splitContainer8.Panel1.ResumeLayout(false);
-            this.splitContainer8.Panel2.ResumeLayout(false);
-            this.splitContainer8.ResumeLayout(false);
-            this.groupBox13.ResumeLayout(false);
-            this.groupBox14.ResumeLayout(false);
-            this.splitContainer9.Panel1.ResumeLayout(false);
-            this.splitContainer9.Panel2.ResumeLayout(false);
-            this.splitContainer9.ResumeLayout(false);
-            this.groupBox15.ResumeLayout(false);
-            this.groupBox15.PerformLayout();
-            this.splitContainer10.Panel1.ResumeLayout(false);
-            this.splitContainer10.Panel2.ResumeLayout(false);
-            this.splitContainer10.ResumeLayout(false);
-            this.groupBox16.ResumeLayout(false);
-            this.groupBox17.ResumeLayout(false);
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+            this.Text = "Options";
+            this.TopMost = true;
             this.tabPage1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -1150,23 +677,14 @@
             this.groupBox10.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.tabPage9.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem menu_0tool;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tab_Scripts;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox lbScripts;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RichTextBox rtbScript;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -1215,30 +733,8 @@
         private System.Windows.Forms.ListView listView5;
         private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.ColumnHeader columnHeader14;
-        private System.Windows.Forms.TabPage tab_Triggers;
-        private System.Windows.Forms.SplitContainer splitContainer8;
-        private System.Windows.Forms.GroupBox groupBox13;
-        private System.Windows.Forms.ListBox lb_Triggers;
-        private System.Windows.Forms.GroupBox groupBox14;
-        private System.Windows.Forms.SplitContainer splitContainer9;
-        private System.Windows.Forms.GroupBox groupBox15;
-        private System.Windows.Forms.SplitContainer splitContainer10;
-        private System.Windows.Forms.GroupBox groupBox16;
-        private System.Windows.Forms.GroupBox groupBox17;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_TriggerCheck;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txt_TriggerDelay;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txt_TriggerRearm;
-        private System.Windows.Forms.RichTextBox rtb_TriggerCondition;
-        private System.Windows.Forms.RichTextBox rtb_TriggerExecute;
-        private System.Windows.Forms.Label lb_ti_once;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem vToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem variablesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem constantsToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ListBox lb_OptionsMain;
     }
 }
 

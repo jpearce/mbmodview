@@ -66,3 +66,4 @@ C:\Git\Repositories\Personal\mbmodview\obj\Debug\MBModViewer.exe
 C:\Git\Repositories\Personal\mbmodview\obj\Debug\MBModViewer.pdb
 C:\Git\Repositories\Personal\mbmodview\bin\Debug\Module\simple_triggers.txt
 C:\Git\Repositories\Personal\mbmodview\bin\Debug\Module\triggers.txt
+C:\Git\Repositories\Personal\mbmodview\obj\Debug\MBModViewer.ConstantForm.resources

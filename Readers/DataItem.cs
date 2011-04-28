@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MBModViewer
 {
@@ -14,13 +15,15 @@ namespace MBModViewer
         internal virtual String Source { get { return _source; } set { _source = value; } }
         /// <summary>Individual numbers assigned, ie for scripts these are the commands.</summary>
         internal virtual Int64[] Content { get { return _content; } set { _content = value; } }
+        /// <summary>Random string values, in order that DataItem lists them.</summary>
+        internal virtual String[] Strings { get { return _strings; } set { _strings = value; } }        
         #endregion
 
         #region private fields
         protected Int32 _id;
         protected String _name, _source;
         protected Int64[] _content;
-
+        protected String[] _strings;
         #endregion
 
         #region ctor
@@ -31,5 +34,30 @@ namespace MBModViewer
             this._id = ItemID;            
         }
         #endregion        
+
+        internal String[] ListContents(DataItemSettings dsi)
+        {//counterpart to listlabels
+            List<String> retval = new List<String>(dsi.LineItemLabels.Count);
+            Int32 countstr = 0, countint = 0;
+            for (int i = 0; i < dsi.LineItemLabels.Count; ++i)
+            {
+                if(dsi.LineItemLabels[i] != null)
+                {
+                    if(dsi.LineItemTypes[i] == LineItemTypes.Int64)
+                    {
+                        retval.Add(this._content[countint].ToString());
+                        ++countint;
+                    }
+                    else if(dsi.LineItemTypes[i] == LineItemTypes.String && dsi.LineItemLabels[i] != "name")
+                    {
+                        retval.Add(this._strings[countstr]);
+                        ++countstr;
+                    }
+                }
+            }
+            return retval.ToArray();
+        }
+
+
     }
 }

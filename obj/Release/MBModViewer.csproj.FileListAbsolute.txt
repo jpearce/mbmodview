@@ -66,3 +66,4 @@ C:\Git\Repositories\Personal\mbmodview\bin\Release\Module\skills.txt
 C:\Git\Repositories\Personal\mbmodview\obj\Release\MBModViewer.ScriptForm.resources
 C:\Git\Repositories\Personal\mbmodview\bin\Release\Module\simple_triggers.txt
 C:\Git\Repositories\Personal\mbmodview\bin\Release\Module\triggers.txt
+C:\Git\Repositories\Personal\mbmodview\obj\Release\MBModViewer.VariableForm.resources
