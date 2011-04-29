@@ -23,7 +23,7 @@ namespace MBModViewer
         protected Int32 _id;
         protected String _name, _source;
         protected Int64[] _content;
-        protected String[] _strings;
+        protected String[] _strings;        
         #endregion
 
         #region ctor

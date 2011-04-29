@@ -61,6 +61,9 @@
     <Compile Include="Forms\OptionForm.Designer.cs">
       <DependentUpon>OptionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CodeTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Readers\ScriptDataReader.cs" />
     <Compile Include="Readers\DataItemSettings.cs" />
     <Compile Include="Readers\DataReaderSettings.cs" />
@@ -309,6 +312,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Module\variables.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xmlsettings\CodeBlocks.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="xmlsettings\DataReaders.xml">

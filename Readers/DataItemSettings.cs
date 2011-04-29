@@ -8,6 +8,7 @@ namespace MBModViewer
         internal String Name;
         internal List<String> LineItemLabels;
         internal List<LineItemTypes> LineItemTypes;
+        internal String Prefix; //for variables
 
         internal DataItemSettings(String name)
         {

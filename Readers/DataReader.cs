@@ -18,8 +18,7 @@ namespace MBModViewer
 
         #region fields
         protected DataItem[] _items;
-        internal DataReaderSettings _settings;
-        
+        internal DataReaderSettings _settings;        
         #endregion
 
         /// <summary>Int64.TryParse wrapper with additional attempt at decoding 0x000 hex literals</summary>        

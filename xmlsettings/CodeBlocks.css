@@ -1,0 +1,24 @@
+﻿body
+{
+	font-family: courier,yukamoondo,serif;
+	font-size: 0.5em;
+	color: #000;
+}
+.operation
+{
+	color: #009;
+}
+.indenter
+{
+	font-weight:bolder;
+}
+.localvar
+{
+	font-weight:bolder;
+	color:#999;
+}
+.globalvar
+{
+	font-weight:bolder;
+	color:#090;
+}

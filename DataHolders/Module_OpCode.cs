@@ -21,8 +21,8 @@ namespace MBModViewer
 
         /// <summary>list of possible or operations as in op1|op2 since there are several combinations that overlap
         /// if it's allowed to look at all ops</summary>
-        private static HashSet<String> oroplist = 
-            new HashSet<string>(new String[] { "this_or_next", "neg", "eq",  "neq", "lt", "le", "gt", "ge" });
+        private static HashSet<String> oroplist =
+            new HashSet<string>(new String[] { "this_or_next", "neq", "le", "ge", "neg", "eq", "lt", "gt" });
         //assigned at runtime since we don't know the opcodes yet
         /// <summary>Indentlist will indent + 1 on next statement, unindent will indent - 1 current statement, 
         /// can be in both and will do both(unindent current statement then indent next ie else_try)</summary>
@@ -281,11 +281,16 @@ namespace MBModViewer
         /// <returns>Modified string with indents.</returns>
         private static String doIndents(int numindents, String toindent)
         {
-            if (numindents == 0) { return toindent; } //speedup
-            char[] newstring = new char[toindent.Length + (numindents * numspaceindent)];
-            Array.Copy(toindent.ToCharArray(), 0, newstring, (numindents * numspaceindent), toindent.Length);
-            for (int i = 0; i < (numindents * numspaceindent); ++i) { newstring[i] = ' '; }
-            return new String(newstring);
+            if (numindents == 0) { return toindent; }
+            else
+            {
+                char[] temp = new char[numindents * numspaceindent];                
+                for (int i = 0; i < temp.Length; ++i)
+                {
+                    temp[i] = ' ';
+                }
+                return new String(temp) + toindent;
+            }
         }
 
         /// <summary>Translate given operation and arguments[].  If supporting another type like 808, modify
@@ -355,7 +360,7 @@ namespace MBModViewer
                     }
                 }
             }
-            if (String.ReferenceEquals(retVal, String.Empty)) { retVal = "UNKNOWN_OPERATION#" + refnum.ToString(); }
+            if (String.ReferenceEquals(retVal, String.Empty)) { retVal = "UNKNOWN_OPERATION#" + refnum.ToString(); }           
             return retVal;
         }
 
@@ -399,7 +404,7 @@ namespace MBModViewer
                         break;
                     case "#register":
                         retVal = "reg" + val.ToString();
-                        break;                    
+                        break;
                     default:                        
                         retVal = StaticDataHolder.FindVarName(type, (Int32)val);
                         break;

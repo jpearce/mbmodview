@@ -13,16 +13,17 @@ namespace MBModViewer
         internal static PythonReader Header_Common;
         internal static PythonReader Header_Operations;
         internal static PythonReader Header_Triggers;
+        internal static Dictionary<String, String> PrefixMap;
 
         internal static void LoadAll()
-        {
+        {            
             LoadDataItems();
             LoadDataReaders();
             CreateDataReaders();
             ReadHeaderCommon();
             ReadHeaderOperations();
             ReadHeaderTriggers();
-        }
+        }        
 
         internal static void ReadHeaderCommon()
         {
@@ -185,6 +186,9 @@ namespace MBModViewer
                                 if (String.IsNullOrEmpty(name))
                                     throw new FormatException("DataItem name not found.");
                                 dis = new DataItemSettings(name);
+                                String prefix = xr.GetAttribute("prefix");
+                                if (prefix == null) { prefix = String.Empty; }
+                                dis.Prefix = prefix;
                                 while (xr.Name != "Processing" && xr.Read()) ;
                                 if (xr.Name == "Processing" && xr.NodeType != XmlNodeType.EndElement)
                                 {
