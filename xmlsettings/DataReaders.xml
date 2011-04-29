@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DataReaders>
+  <DataReader name="string" filename="strings.txt" dirsetting="filelocation_txtdir" dataitem="string" startline="3"/>
+  <DataReader name="quick_string" filename="quick_strings.txt" dirsetting="filelocation_txtdir" dataitem="string" startline="2"/>
   <DataReader name="faction" filename="factions.txt" dirsetting="filelocation_txtdir" dataitem="faction" startline="3"/>
   <DataReader name="variable" filename="variables.txt" dirsetting="filelocation_txtdir" dataitem="globalvar" startline="2"/>
   <DataReader name="mesh" filename="meshes.txt" dirsetting="filelocation_txtdir" dataitem="mesh" startline="3"/>
   <DataReader name="party" filename="parties.txt" dirsetting="filelocation_txtdir" dataitem="party" startline="3"/>
   <DataReader name="party_tpl" filename="party_templates.txt" dirsetting="filelocation_txtdir" dataitem="party_tpl" startline="3"/>
-  <DataReader name="quick_string" filename="quick_strings.txt" dirsetting="filelocation_txtdir" dataitem="string" startline="2"/>
-  <DataReader name="string" filename="strings.txt" dirsetting="filelocation_txtdir" dataitem="string" startline="3"/>
   <DataReader name="item" filename="item_kinds1.txt" dirsetting="filelocation_txtdir" dataitem="item" startline="3"/>
   <DataReader name="scene" filename="scenes.txt" dirsetting="filelocation_txtdir" dataitem="scene" startline="3"/>
   <DataReader name="scene_prop" filename="scene_props.txt" dirsetting="filelocation_txtdir" dataitem="scene_prop" startline="3"/>

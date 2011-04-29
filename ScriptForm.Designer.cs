@@ -50,11 +50,20 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.ct_Script0 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctscript_menuLookup = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctscript_menuCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctscript_menuCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctscript_menuPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctscript_menuSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tab_Scripts = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbScripts = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rtb_Script = new MBModViewer.CodeTextBox();
             this.tab_Triggers = new System.Windows.Forms.TabPage();
             this.splitContainer8 = new System.Windows.Forms.SplitContainer();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
@@ -74,17 +83,6 @@
             this.rtb_TriggerCondition = new MBModViewer.CodeTextBox();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.rtb_TriggerExecute = new MBModViewer.CodeTextBox();
-            this.ct_Script0 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ctscript_menuLookup = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.ctscript_menuCut = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctscript_menuCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctscript_menuPaste = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ctscript_menuUndo = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctscript_menuRedo = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.ctscript_menuSelectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -133,9 +131,9 @@
             this.listView5 = new System.Windows.Forms.ListView();
             this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
-            this.rtb_Script = new MBModViewer.CodeTextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.ct_Script0.SuspendLayout();
             this.tab_Scripts.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -157,7 +155,6 @@
             this.splitContainer10.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.groupBox17.SuspendLayout();
-            this.ct_Script0.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -240,7 +237,6 @@
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.undoToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.undoToolStripMenuItem.Text = "&Undo";
-            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // redoToolStripMenuItem
             // 
@@ -248,7 +244,6 @@
             this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.redoToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.redoToolStripMenuItem.Text = "&Redo";
-            this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -354,6 +349,7 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.ContextMenuStrip = this.ct_Script0;
             this.tabControl1.Controls.Add(this.tab_Scripts);
             this.tabControl1.Controls.Add(this.tab_Triggers);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -363,6 +359,64 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1177, 593);
             this.tabControl1.TabIndex = 1;
+            // 
+            // ct_Script0
+            // 
+            this.ct_Script0.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctscript_menuLookup,
+            this.toolStripSeparator2,
+            this.ctscript_menuCut,
+            this.ctscript_menuCopy,
+            this.ctscript_menuPaste,
+            this.toolStripSeparator3,
+            this.ctscript_menuSelectAll});
+            this.ct_Script0.Name = "ct_Script0";
+            this.ct_Script0.Size = new System.Drawing.Size(123, 126);
+            // 
+            // ctscript_menuLookup
+            // 
+            this.ctscript_menuLookup.Name = "ctscript_menuLookup";
+            this.ctscript_menuLookup.Size = new System.Drawing.Size(122, 22);
+            this.ctscript_menuLookup.Text = "Lookup";
+            this.ctscript_menuLookup.Click += new System.EventHandler(this.ctscript_menuLookup_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(119, 6);
+            // 
+            // ctscript_menuCut
+            // 
+            this.ctscript_menuCut.Name = "ctscript_menuCut";
+            this.ctscript_menuCut.Size = new System.Drawing.Size(122, 22);
+            this.ctscript_menuCut.Text = "Cut";
+            this.ctscript_menuCut.Click += new System.EventHandler(this.ctscript_menuCut_Click);
+            // 
+            // ctscript_menuCopy
+            // 
+            this.ctscript_menuCopy.Name = "ctscript_menuCopy";
+            this.ctscript_menuCopy.Size = new System.Drawing.Size(122, 22);
+            this.ctscript_menuCopy.Text = "Copy";
+            this.ctscript_menuCopy.Click += new System.EventHandler(this.ctscript_menuCopy_Click);
+            // 
+            // ctscript_menuPaste
+            // 
+            this.ctscript_menuPaste.Name = "ctscript_menuPaste";
+            this.ctscript_menuPaste.Size = new System.Drawing.Size(122, 22);
+            this.ctscript_menuPaste.Text = "Paste";
+            this.ctscript_menuPaste.Click += new System.EventHandler(this.ctscript_menuPaste_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(119, 6);
+            // 
+            // ctscript_menuSelectAll
+            // 
+            this.ctscript_menuSelectAll.Name = "ctscript_menuSelectAll";
+            this.ctscript_menuSelectAll.Size = new System.Drawing.Size(122, 22);
+            this.ctscript_menuSelectAll.Text = "Select All";
+            this.ctscript_menuSelectAll.Click += new System.EventHandler(this.ctscript_menuSelectAll_Click);
             // 
             // tab_Scripts
             // 
@@ -433,6 +487,19 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Script Text";
+            // 
+            // rtb_Script
+            // 
+            this.rtb_Script.AutoWordSelection = true;
+            this.rtb_Script.ContextMenuStrip = this.ct_Script0;
+            this.rtb_Script.DetectUrls = false;
+            this.rtb_Script.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_Script.Location = new System.Drawing.Point(3, 20);
+            this.rtb_Script.Name = "rtb_Script";
+            this.rtb_Script.Size = new System.Drawing.Size(857, 532);
+            this.rtb_Script.TabIndex = 0;
+            this.rtb_Script.Text = "";
+            this.rtb_Script.WordWrap = false;
             // 
             // tab_Triggers
             // 
@@ -518,7 +585,7 @@
             // 
             this.splitContainer9.Panel2.Controls.Add(this.splitContainer10);
             this.splitContainer9.Size = new System.Drawing.Size(962, 540);
-            this.splitContainer9.SplitterDistance = 93;
+            this.splitContainer9.SplitterDistance = 92;
             this.splitContainer9.SplitterWidth = 5;
             this.splitContainer9.TabIndex = 0;
             // 
@@ -536,7 +603,7 @@
             this.groupBox15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox15.Size = new System.Drawing.Size(962, 93);
+            this.groupBox15.Size = new System.Drawing.Size(962, 92);
             this.groupBox15.TabIndex = 0;
             this.groupBox15.TabStop = false;
             this.groupBox15.Text = "Attributes";
@@ -614,7 +681,7 @@
             // splitContainer10.Panel2
             // 
             this.splitContainer10.Panel2.Controls.Add(this.groupBox17);
-            this.splitContainer10.Size = new System.Drawing.Size(962, 442);
+            this.splitContainer10.Size = new System.Drawing.Size(962, 443);
             this.splitContainer10.SplitterDistance = 451;
             this.splitContainer10.SplitterWidth = 5;
             this.splitContainer10.TabIndex = 0;
@@ -627,7 +694,7 @@
             this.groupBox16.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox16.Size = new System.Drawing.Size(451, 442);
+            this.groupBox16.Size = new System.Drawing.Size(451, 443);
             this.groupBox16.TabIndex = 1;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Condition";
@@ -636,6 +703,7 @@
             // 
             this.rtb_TriggerCondition.AcceptsTab = true;
             this.rtb_TriggerCondition.BackColor = System.Drawing.SystemColors.Window;
+            this.rtb_TriggerCondition.ContextMenuStrip = this.ct_Script0;
             this.rtb_TriggerCondition.DetectUrls = false;
             this.rtb_TriggerCondition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_TriggerCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -645,11 +713,10 @@
             this.rtb_TriggerCondition.Name = "rtb_TriggerCondition";
             this.rtb_TriggerCondition.ReadOnly = true;
             this.rtb_TriggerCondition.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtb_TriggerCondition.Size = new System.Drawing.Size(445, 418);
+            this.rtb_TriggerCondition.Size = new System.Drawing.Size(445, 419);
             this.rtb_TriggerCondition.TabIndex = 1;
             this.rtb_TriggerCondition.Text = "";
             this.rtb_TriggerCondition.WordWrap = false;
-            
             // 
             // groupBox17
             // 
@@ -659,7 +726,7 @@
             this.groupBox17.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox17.Size = new System.Drawing.Size(506, 442);
+            this.groupBox17.Size = new System.Drawing.Size(506, 443);
             this.groupBox17.TabIndex = 1;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "Execute";
@@ -668,6 +735,7 @@
             // 
             this.rtb_TriggerExecute.AcceptsTab = true;
             this.rtb_TriggerExecute.BackColor = System.Drawing.SystemColors.Window;
+            this.rtb_TriggerExecute.ContextMenuStrip = this.ct_Script0;
             this.rtb_TriggerExecute.DetectUrls = false;
             this.rtb_TriggerExecute.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_TriggerExecute.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -677,90 +745,10 @@
             this.rtb_TriggerExecute.Name = "rtb_TriggerExecute";
             this.rtb_TriggerExecute.ReadOnly = true;
             this.rtb_TriggerExecute.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtb_TriggerExecute.Size = new System.Drawing.Size(500, 418);
+            this.rtb_TriggerExecute.Size = new System.Drawing.Size(500, 419);
             this.rtb_TriggerExecute.TabIndex = 1;
             this.rtb_TriggerExecute.Text = "";
             this.rtb_TriggerExecute.WordWrap = false;
-            
-            // 
-            // ct_Script0
-            // 
-            this.ct_Script0.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ctscript_menuLookup,
-            this.toolStripSeparator2,
-            this.ctscript_menuCut,
-            this.ctscript_menuCopy,
-            this.ctscript_menuPaste,
-            this.toolStripSeparator1,
-            this.ctscript_menuUndo,
-            this.ctscript_menuRedo,
-            this.toolStripSeparator3,
-            this.ctscript_menuSelectAll});
-            this.ct_Script0.Name = "ct_Script0";
-            this.ct_Script0.Size = new System.Drawing.Size(123, 176);
-            // 
-            // ctscript_menuLookup
-            // 
-            this.ctscript_menuLookup.Name = "ctscript_menuLookup";
-            this.ctscript_menuLookup.Size = new System.Drawing.Size(122, 22);
-            this.ctscript_menuLookup.Text = "Lookup";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(119, 6);
-            // 
-            // ctscript_menuCut
-            // 
-            this.ctscript_menuCut.Name = "ctscript_menuCut";
-            this.ctscript_menuCut.Size = new System.Drawing.Size(122, 22);
-            this.ctscript_menuCut.Text = "Cut";
-            this.ctscript_menuCut.Click += new System.EventHandler(this.ctscript_menuCut_Click);
-            // 
-            // ctscript_menuCopy
-            // 
-            this.ctscript_menuCopy.Name = "ctscript_menuCopy";
-            this.ctscript_menuCopy.Size = new System.Drawing.Size(122, 22);
-            this.ctscript_menuCopy.Text = "Copy";
-            this.ctscript_menuCopy.Click += new System.EventHandler(this.ctscript_menuCopy_Click);
-            // 
-            // ctscript_menuPaste
-            // 
-            this.ctscript_menuPaste.Name = "ctscript_menuPaste";
-            this.ctscript_menuPaste.Size = new System.Drawing.Size(122, 22);
-            this.ctscript_menuPaste.Text = "Paste";
-            this.ctscript_menuPaste.Click += new System.EventHandler(this.ctscript_menuPaste_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
-            // 
-            // ctscript_menuUndo
-            // 
-            this.ctscript_menuUndo.Name = "ctscript_menuUndo";
-            this.ctscript_menuUndo.Size = new System.Drawing.Size(122, 22);
-            this.ctscript_menuUndo.Text = "Undo";
-            this.ctscript_menuUndo.Click += new System.EventHandler(this.ctscript_menuUndo_Click);
-            // 
-            // ctscript_menuRedo
-            // 
-            this.ctscript_menuRedo.Name = "ctscript_menuRedo";
-            this.ctscript_menuRedo.Size = new System.Drawing.Size(122, 22);
-            this.ctscript_menuRedo.Text = "Redo";
-            this.ctscript_menuRedo.Click += new System.EventHandler(this.ctscript_menuRedo_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(119, 6);
-            // 
-            // ctscript_menuSelectAll
-            // 
-            this.ctscript_menuSelectAll.Name = "ctscript_menuSelectAll";
-            this.ctscript_menuSelectAll.Size = new System.Drawing.Size(122, 22);
-            this.ctscript_menuSelectAll.Text = "Select All";
-            this.ctscript_menuSelectAll.Click += new System.EventHandler(this.ctscript_menuSelectAll_Click);
             // 
             // tabPage1
             // 
@@ -1261,15 +1249,6 @@
             this.columnHeader14.Text = "Value";
             this.columnHeader14.Width = 174;
             // 
-            // rtb_Script
-            // 
-            this.rtb_Script.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_Script.Location = new System.Drawing.Point(3, 20);
-            this.rtb_Script.Name = "rtb_Script";
-            this.rtb_Script.Size = new System.Drawing.Size(857, 532);
-            this.rtb_Script.TabIndex = 0;
-            this.rtb_Script.Text = "";
-            // 
             // ScriptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -1286,6 +1265,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.ct_Script0.ResumeLayout(false);
             this.tab_Scripts.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -1308,7 +1288,6 @@
             this.splitContainer10.ResumeLayout(false);
             this.groupBox16.ResumeLayout(false);
             this.groupBox17.ResumeLayout(false);
-            this.ct_Script0.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -1429,11 +1408,8 @@
         private System.Windows.Forms.ToolStripMenuItem ctscript_menuCut;
         private System.Windows.Forms.ToolStripMenuItem ctscript_menuCopy;
         private System.Windows.Forms.ToolStripMenuItem ctscript_menuPaste;
-        private System.Windows.Forms.ToolStripMenuItem ctscript_menuUndo;
-        private System.Windows.Forms.ToolStripMenuItem ctscript_menuRedo;
         private System.Windows.Forms.ToolStripMenuItem ctscript_menuLookup;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;

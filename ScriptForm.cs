@@ -17,8 +17,7 @@ namespace MBModViewer
             //MessageBox.Show("Error loading xml configurations:\n" + ex.Message);                  
             LoadScripts();//after vars/constants/ops
             LoadTriggers();//after scripts (for call_script)
-            lb_ti_once.Text = String.Format("(only once = {0})", StaticDataHolder.Header_Triggers.KeyValue("ti_once").ToString());
-            
+            lb_ti_once.Text = String.Format("(only once = {0})", StaticDataHolder.Header_Triggers.KeyValue("ti_once").ToString());            
         }
 
         private void LoadTriggers()
@@ -43,8 +42,6 @@ namespace MBModViewer
                 MessageBox.Show(loadex.Message, "Trigger loading error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }            
         }
-
-
 
         private void LoadScripts()
         {
@@ -82,12 +79,6 @@ namespace MBModViewer
             rtb_Script.Lines = scriptcontents; 
         }
 
-        
-        
-        
-
-        
-
         private void lb_Triggers_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lb_Triggers.SelectedItem.ToString().StartsWith("Simple"))
@@ -109,13 +100,12 @@ namespace MBModViewer
                 txt_TriggerRearm.Text = Module_OpCode.TriggerRearm(lb_Triggers.SelectedItem.ToString());
                 String[] conditions;
                 Module_OpCode.SetTriggerConditions(lb_Triggers.SelectedItem.ToString(), out conditions);
-                rtb_TriggerCondition.Hide();
+                
                 rtb_TriggerCondition.Lines = conditions;
                 
             }
             String[] execute;
-            Module_OpCode.SetTriggerContents(lb_Triggers.SelectedItem.ToString(), out execute);
-            rtb_TriggerExecute.Hide();
+            Module_OpCode.SetTriggerContents(lb_Triggers.SelectedItem.ToString(), out execute);            
             rtb_TriggerExecute.Lines = execute;
         }
 
@@ -141,7 +131,7 @@ namespace MBModViewer
             variables.BringToFront();
         }
 
-        private static ConstantForm constants = null;
+        private ConstantForm constants = null;
         private void constantsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (constants == null || constants.IsDisposed)
@@ -161,44 +151,46 @@ namespace MBModViewer
             }
         }
 
-        private void wbCut(WebBrowser wb) { wb.Document.ExecCommand("Cut", false, null); }
-        private void wbCopy(WebBrowser wb) { wb.Document.ExecCommand("Copy", false, null); }
-        private void wbPaste(WebBrowser wb) { wb.Document.ExecCommand("Paste", false, null); }
-        private void wbUndo(WebBrowser wb) { wb.Document.ExecCommand("Undo", false, null); }
-        private void wbRedo(WebBrowser wb) { wb.Document.ExecCommand("Redo", false, null); }
-        private void wbSelectAll(WebBrowser wb) { wb.Document.ExecCommand("SelectAll", false, null); }
-
         private void ctscript_menuCut_Click(object sender, EventArgs e)
         {
-            WebBrowser wb = ct_Script0.SourceControl as WebBrowser;
-            if (!ReferenceEquals(wb, null)) { wbCut(wb); }
+            if (ct_Script0.SourceControl == rtb_Script) { rtb_Script.Cut(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerCondition) { rtb_TriggerCondition.Cut(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerExecute) { rtb_TriggerExecute.Cut(); }
         }
 
         private void ctscript_menuCopy_Click(object sender, EventArgs e)
         {
-            WebBrowser wb = ct_Script0.SourceControl as WebBrowser;
-            if (!ReferenceEquals(wb, null)) { wbCopy(wb); }
+            if (ct_Script0.SourceControl == rtb_Script) { rtb_Script.Copy(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerCondition) { rtb_TriggerCondition.Copy(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerExecute) { rtb_TriggerExecute.Copy(); }
         }
+
         private void ctscript_menuPaste_Click(object sender, EventArgs e)
         {
-            WebBrowser wb = ct_Script0.SourceControl as WebBrowser;
-            if (!ReferenceEquals(wb, null)) { wbPaste(wb); }
+            if (ct_Script0.SourceControl == rtb_Script) { rtb_Script.Paste(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerCondition) { rtb_TriggerCondition.Paste(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerExecute) { rtb_TriggerExecute.Paste(); }
         }
+
         private void ctscript_menuUndo_Click(object sender, EventArgs e)
         {
-            WebBrowser wb = ct_Script0.SourceControl as WebBrowser;
-            if (!ReferenceEquals(wb, null)) { wbUndo(wb); }
+            if (ct_Script0.SourceControl == rtb_Script) { rtb_Script.Undo(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerCondition) { rtb_TriggerCondition.Undo(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerExecute) { rtb_TriggerExecute.Undo(); }
         }
+
         private void ctscript_menuRedo_Click(object sender, EventArgs e)
         {
-            WebBrowser wb = ct_Script0.SourceControl as WebBrowser;
-            if (!ReferenceEquals(wb, null)) { wbRedo(wb); }
+            if (ct_Script0.SourceControl == rtb_Script) { rtb_Script.Redo(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerCondition) { rtb_TriggerCondition.Redo(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerExecute) { rtb_TriggerExecute.Redo(); }
         }
 
         private void ctscript_menuSelectAll_Click(object sender, EventArgs e)
         {
-            WebBrowser wb = ct_Script0.SourceControl as WebBrowser;
-            if (!ReferenceEquals(wb, null)) { wbSelectAll(wb); }
+            if (ct_Script0.SourceControl == rtb_Script) { rtb_Script.SelectAll(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerCondition) { rtb_TriggerCondition.SelectAll(); }
+            else if (ct_Script0.SourceControl == rtb_TriggerExecute) { rtb_TriggerExecute.SelectAll(); }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -206,34 +198,146 @@ namespace MBModViewer
             Application.Exit();
         }
 
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //if (wb_script.Focused) { wbUndo(wb_script); }
-        }
-
-        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //if (wb_script.Focused) { wbRedo(wb_script); }
-        }
-
         private void cutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (wb_script.Focused) { wbRedo(wb_script); }
+            if (rtb_Script.Focused) { rtb_Script.Cut(); }
+            else if (rtb_TriggerCondition.Focused) { rtb_TriggerCondition.Cut(); }
+            else if (rtb_TriggerExecute.Focused) { rtb_TriggerExecute.Cut(); }
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (wb_script.Focused) { wbCopy(wb_script); }
+            if (rtb_Script.Focused) { rtb_Script.Copy(); }
+            else if (rtb_TriggerCondition.Focused) { rtb_TriggerCondition.Copy(); }
+            else if (rtb_TriggerExecute.Focused) { rtb_TriggerExecute.Copy(); }
         }
 
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (wb_script.Focused) { wbPaste(wb_script); }
+            if (rtb_Script.Focused) { rtb_Script.Paste(); }
+            else if (rtb_TriggerCondition.Focused) { rtb_TriggerCondition.Paste(); }
+            else if (rtb_TriggerExecute.Focused) { rtb_TriggerExecute.Paste(); }
         }
 
         private void selectallToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //if (wb_script.Focused) { wbSelectAll(wb_script); }
+            if (rtb_Script.Focused) { rtb_Script.SelectAll(); }
+            else if (rtb_TriggerCondition.Focused) { rtb_TriggerCondition.SelectAll(); }
+            else if (rtb_TriggerExecute.Focused) { rtb_TriggerExecute.SelectAll(); }
+        }
+
+        private void ctscript_menuLookup_Click(object sender, EventArgs e)
+        {//move lookup functionality to staticdataholder at some point
+            if (rtb_Script.Focused || rtb_TriggerCondition.Focused || rtb_TriggerExecute.Focused)
+            {
+                String temp = null;
+                if (rtb_Script.Focused) { temp = rtb_Script.GetWordAtCaret(); }
+                else if (rtb_TriggerCondition.Focused) { temp = rtb_TriggerCondition.GetWordAtCaret(); }
+                else if (rtb_TriggerExecute.Focused) { temp = rtb_TriggerExecute.GetWordAtCaret(); }
+                
+                if (temp == null || temp.Length < 2 || temp[0] != '"' || temp[1] == ':')
+                {
+                    MessageBox.Show("No valid lookup text found.");
+                }
+                else
+                {
+                    String lookitup = temp.Replace("\"", String.Empty);
+                    bool foundit = false;
+                    //see if it's a script
+                    if (lookitup.StartsWith("script_"))
+                    {
+                        lookitup = lookitup.Substring(7);
+                        for (int i = 0; i < lbScripts.Items.Count && !foundit; ++i)
+                        {
+                            if (lbScripts.Items[i].ToString() == lookitup)
+                            {
+                                lbScripts.SelectedIndex = i;
+                                foundit = true;
+                            }
+                        }
+                        if(!foundit) { lookitup = "script_" + lookitup; }//put it back
+                    }
+                    if (!foundit)
+                    {//look through variables 
+                        String vartype = null, varname = null;
+                        if (lookitup[0] == '$')
+                        {
+                            lookitup = lookitup.Substring(1);
+                            vartype = "globalvar";
+                            for (int j = 0; j < StaticDataHolder.DataReaders.Length && !foundit; ++j)
+                            {
+                                if (StaticDataHolder.DataReaders[j].ItemType == vartype)
+                                {
+                                    for (int k = 0; k < StaticDataHolder.DataReaders[j].Items.Length && !foundit; ++k)
+                                    {
+                                        if (StaticDataHolder.DataReaders[j].Items[k].Name == lookitup)
+                                        {
+                                            //MessageBox.Show(vartype + "->" + lookitup);
+                                            varname = StaticDataHolder.DataReaders[j].Name;
+                                            foundit = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {                            
+                            //variables with known prefixes
+                            for (int i = 0; i < StaticDataHolder.ItemSettings.Length && !foundit; ++i)
+                            {
+                                if (!String.IsNullOrEmpty(StaticDataHolder.ItemSettings[i].Prefix) &&
+                                    lookitup.StartsWith(StaticDataHolder.ItemSettings[i].Prefix))
+                                {
+                                    vartype = StaticDataHolder.ItemSettings[i].Name;
+                                    for (int j = 0; j < StaticDataHolder.DataReaders.Length && !foundit; ++j)
+                                    {
+                                        if (StaticDataHolder.DataReaders[j].ItemType == vartype)
+                                        {
+                                            for (int k = 0; k < StaticDataHolder.DataReaders[j].Items.Length && !foundit; ++k)
+                                            {
+                                                if (StaticDataHolder.DataReaders[j].Items[k].Name == lookitup)
+                                                {
+                                                    //MessageBox.Show(vartype + "->" + lookitup);
+                                                    varname = StaticDataHolder.DataReaders[j].Name;
+                                                    foundit = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            //variables without known prefixes
+                            for (int i = 0; i < StaticDataHolder.ItemSettings.Length && !foundit; ++i)
+                            {
+                                if (String.IsNullOrEmpty(StaticDataHolder.ItemSettings[i].Prefix))
+                                {
+                                    vartype = StaticDataHolder.ItemSettings[i].Name;
+                                    for (int j = 0; j < StaticDataHolder.DataReaders.Length && !foundit; ++j)
+                                    {
+                                        if (StaticDataHolder.DataReaders[j].ItemType == vartype)
+                                        {
+                                            for (int k = 0; k < StaticDataHolder.DataReaders[j].Items.Length && !foundit; ++k)
+                                            {
+                                                if (StaticDataHolder.DataReaders[j].Items[k].Name == lookitup)
+                                                {
+                                                    //MessageBox.Show(vartype + "->" + lookitup);
+                                                    foundit = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!String.IsNullOrEmpty(varname))
+                        {
+                            variablesToolStripMenuItem_Click(null, null);//just use the menuitem clicker
+                            variables.GoToVar(varname, lookitup);
+                        }
+                    }
+                    if (!foundit) { MessageBox.Show("Unable to find " + lookitup); }
+                }
+            }
         }
 
         

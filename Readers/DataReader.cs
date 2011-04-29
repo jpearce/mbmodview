@@ -113,6 +113,7 @@ namespace MBModViewer
                                     Int64.TryParse(linestr.Remove(linestr.IndexOf(' ')), out newint);
                                 }
                             }
+                            else { Int64.TryParse(linestr, out newint); } //end of the list = rest of the string
                             tempcontents.Add(newint);
                             break;
                         case LineItemTypes.String:
@@ -129,20 +130,24 @@ namespace MBModViewer
                                         newitem.Name = linestr.Remove(linestr.IndexOf(' ')).Trim();
                                     }
                                 }
+                                else { newitem.Name = linestr.Trim(); } //end of the list = rest of the string
                             }
                             else
                             {
+                                String newstring = String.Empty;
                                 if (this._settings.DataType.LineItemTypes.Count > (i + 1))
                                 {
                                     if (this._settings.DataType.LineItemTypes[i + 1] == LineItemTypes.LineEnd)
                                     {
-                                        tempstrings.Add(linestr.Trim());
+                                        newstring = linestr.Trim();
                                     }
                                     else if (this._settings.DataType.LineItemTypes[i + 1] == LineItemTypes.Space)
                                     {
-                                        tempstrings.Add(linestr.Remove(linestr.IndexOf(' ')).Trim());
+                                        newstring = linestr.Remove(linestr.IndexOf(' ')).Trim();
                                     }
                                 }
+                                else { newstring = linestr.Trim(); } //end of the list = rest of the string
+                                tempstrings.Add(newstring);
                             }
                             break;
                         case LineItemTypes.Space:

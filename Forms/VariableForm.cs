@@ -14,6 +14,26 @@ namespace MBModViewer
             LoadModVars();
         }
 
+        public void GoToVar(String type, String name)
+        {
+            for (int i = 0; i < this.lb_mvtypes.Items.Count; ++i)
+            {
+                if (this.lb_mvtypes.Items[i].ToString() == type)
+                {
+                    this.lb_mvtypes.SelectedIndex = i;
+                    for (int j = 0; j < this.lb_mvnames.Items.Count; ++j)
+                    {
+                        if (this.lb_mvnames.Items[j].ToString() == name)
+                        {
+                            this.lb_mvnames.SelectedIndex = j;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
         private void LoadModVars()
         {
             lb_mvtypes.Items.Clear();

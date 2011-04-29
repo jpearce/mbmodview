@@ -206,9 +206,6 @@
     <Content Include="Module\variables.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="xmlsettings\CodeBlocks.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="xmlsettings\DataReaders.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
